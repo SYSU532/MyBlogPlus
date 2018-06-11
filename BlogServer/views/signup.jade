@@ -1,0 +1,33 @@
+extends sign_layout
+
+block body
+	div(id='alert')
+		div(id='fail_alert' class='alert alert-danger hide')
+			button(href='#' class='close' data-dismiss='alert') &times;
+			button(type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id='down') 错误！ 注册用户时出错！！  
+				span(class='caret')
+			ul(class='dropdown-menu' role='menu' id='error-menu')
+	div(class="middle-box text-center loginscreen animated fadeInDown")
+		div(class="form-group")
+			input(class="form-control" type="text" placeholder="Username" id="user" data-toggle="tooltip" title="用户名6~18位英文字母、数字或下划线，必须以英文字母开头" data-placement="right" data-trigger="hover")
+			div(class="tip" id="user-tip")
+		div(class="form-group")
+			input(class="form-control" type="password" placeholder="Password" id="pass" data-toggle="tooltip" title="密码6~12位数字，大小写字母，中划线，下划线" data-placement="right" data-trigger="hover")
+			div(class="tip" id="pass-tip")
+		div(class="form-group")
+			input(class="form-control" type="password" placeholder="Again Password" id="re-pass" data-toggle="tooltip" title="两次输入的密码必须相同" data-placement="right" data-trigger="hover")
+			div(class="tip" id="re-pass-tip")
+		div(class="form-group")
+			input(class="form-control" type="text" placeholder="Student ID" id="id" data-toggle="tooltip" title="学号必须以8位数字组成" data-placement="right" data-trigger="hover")
+			div(class="tip" id="id-tip")
+		div(class="form-group")
+			input(class="form-control" type="text" placeholder="Phone" id="phone" data-toggle="tooltip" title="电话11位数字，不能以0开头" data-placement="right" data-trigger="hover")
+			div(class="tip" id="phone-tip")
+		div(class="form-group")
+			input(class="form-control" type="text" placeholder="E-mail" id="e-mail" data-toggle="tooltip" title="邮箱形式必须为XXX@XXX.XXX" data-placement="right" data-trigger="hover")
+			div(class="tip" id="e-mail-tip")
+		button(type="button" class="btn btn-primary block full-width m-b" id="logup") Regist
+		p(class="s-para") Make mistakes when writing informations?
+		button(type="button" class="btn btn-primary btn-signup" id="clear") Clear
+		button(type="button" class="btn btn-primary btn-signup btn-bottom" id="login") Return to signin
+		script(src="/js/signup.js")
