@@ -1,4 +1,4 @@
 # MyBlogPlus
-### This project is the database coursee's final-term website homework, named MyBlog+
+### This project is for the final assignment of the Database System course, named MyBlog+.
 
-### Hope you can enjoy~~
+### Hope you enjoy it~~
