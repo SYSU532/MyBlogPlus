@@ -7,6 +7,7 @@ html
     link(href="img/icon1.png", rel="icon", type="image/png")
     link(href='css/bootstrap.min.css', rel='stylesheet')
     link(href='font-awesome/css/font-awesome.css', rel='stylesheet')
+    link(href='css/emoji.css', rel='stylesheet')
     // Toastr style
     link(href='css/plugins/toastr/toastr.min.css', rel='stylesheet')
     // Gritter
@@ -59,15 +60,15 @@ html
                 i.fa.fa-user
                 span.nav-label User Profiles
             li#publish-btn
-              a
+              a(href='publish')
                 i.fa.fa-plus-square
                 span.nav-label Publish a blog
             li#friends-btn
-              a
+              a(href='friends')
                 i.fa.fa-group
                 span.nav-label Friends
             li#search-btn
-              a
+              a(href='search')
                 i.fa.fa-search
                 span.nav-label Search New Friends
     // Mainly scripts
@@ -86,6 +87,7 @@ html
     script(src='js/demo/peity-demo.js')
     // Custom and plugin javascript
     script(src='js/inspinia.js')
+    script(src='js/alert.js')
     script(src='js/plugins/pace/pace.min.js')
     // jQuery UI
     script(src='js/plugins/jquery-ui/jquery-ui.min.js')

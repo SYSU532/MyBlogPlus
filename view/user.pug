@@ -41,5 +41,31 @@ block body
               li
                 a.right-sidebar-toggle
                   i.fa.fa-tasks
+        .row
+          .col-lg-12
+            .wrapper.wrapper-content
+              .row.row-post
+                .col-lg-4
+                  .ibox.float-e-margins
+                    .ibox-title
+                      h5 User Profiles
+                      span.label.label-primary MyBlog+
+                    .ibox-content
+                      span.profile-row(style='margin-left: 38%;')
+                        span.profile-words User Image: &nbsp;&nbsp;&nbsp;&nbsp;
+                        img.profile-img.img-circle(alt='image', src='img/user.jpg')
+                        input(id='updater', type='file', style='display:none;')
+                      span.profile-row
+                        span.profile-words User Name: &nbsp;&nbsp;&nbsp;&nbsp;
+                        input#username.profile-input(readonly='readonly', style='background-color:#F7F7F7;cursor:not-allowed;')
+                      span.profile-row
+                        span.profile-words User Phone: &nbsp;&nbsp;&nbsp;&nbsp;
+                        input#phone.profile-input
+                      span.profile-row
+                        span.profile-words User Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        input#email.profile-input
+                      span.profile-row(style='margin-left: 40%;margin-top:40px;')
+                        input#commit.profile-btn(type='button', value='Commit')
+                        input#cancel.profile-btn(type='button', value='Cancel')
 
       script(src='js/user.js')

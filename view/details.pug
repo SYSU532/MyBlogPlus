@@ -1,7 +1,7 @@
 extends base
 
 block title
-  title MyBlog+ | Friends
+  title MyBlog+ | Blog Details
 
 block body
       #page-wrapper.gray-bg.dashbard-1(style='min-height: 898px;')
@@ -48,36 +48,25 @@ block body
                 .col-lg-4
                   .ibox.float-e-margins
                     .ibox-title
-                      h5 My Friends
+                      h5 Test
                       span.label.label-primary MyBlog+
                     .ibox-content(style='float:left;')
-                      div
-                        .friends-left
-                          .friends-title
-                            span.friends-name Friends List
-                          .friends-row
-                            img.friends-img.img-circle(alt='image', src='img/follower.jpg')
-                            span.friends-name Follower 1
-                            a.dropdown-toggle(data-toggle="true")
-                            ul.dropdown-menu.animated.fadeInRight.friend-item(data-toggle="true")
-                              li
-                                a.f-profiles Check Friend's Profiles
-                        .friends-right(style='background-color: #F3F3F4;')
-                          .friends-title(style='width:900px;margin-left:0;')
-                            span.friends-name Chat Room
-                          div
-                            div.talk-friend
-                              span#talking-friend.friends-words Follower 1
-                            div.chat-panel
-                            div.send-panel
-                              .lead.emoji-picker-container
-                                textarea#send-text.friends-textarea(data-emojiable="true")
-                              div.send-row
-                                input#send.profile-btn(type='button', value='Send', style='margin-left: 85%;')
-                              
+                      .details-left
+                        span Title: Test 
+                        br
+                        br
+                        span Editor: Palette Chen
+                        br
+                        br
+                        span Media-Format: Image
+                      .details-right
+                        img.details-img(alt='image', src='img/follower.jpg')
+                      .details-bottom
+                        span.details-head Content
+                        br
+                        br
+                        .details-content
+                          p First Test Message ~~~~
+                      
 
-      script(src='js/friends.js')
-      script(src='js/config.js')
-      script(src='js/util.js')
-      script(src='js/jquery.emojiarea.js')
-      script(src='js/emoji-picker.js')
+      script(src='js/details.js')

@@ -47,6 +47,22 @@ router.get('/user', async(ctx, next) => {
     await ctx.render('user');
 });
 
+router.get('/publish', async(ctx, next) => {
+    await ctx.render('publish');
+});
+
+router.get('/friends', async(ctx, next) => {
+    await ctx.render('friends');
+});
+
+router.get('/search', async(ctx, next) => {
+    await ctx.render('search');
+});
+
+router.get('/details', async(ctx, next) => {
+    await ctx.render('details');
+})
+
 app.use(router.routes());
 
 app.listen(18080);

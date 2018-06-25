@@ -13,4 +13,8 @@ $(document).ready(function(){
                 toastr.success('A website for blogs and talks~', 'Welcome to MyBlog+');
 
             }, 500);
+    
+    $(".post-item").click(function(){
+        window.location.href = '/details';
+    });
 });

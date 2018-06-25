@@ -1,0 +1,68 @@
+extends base
+
+block title
+  title MyBlog+ | Publish
+
+block body
+      #page-wrapper.gray-bg.dashbard-1(style='min-height: 898px;')
+        .row.border-bottom
+          nav.navbar.navbar-static-top(role='navigation', style='margin-bottom: 0')
+            .navbar-header
+              a.navbar-minimalize.minimalize-styl-2.btn.btn-primary
+                i.fa.fa-bars
+              form.navbar-form-custom(role='search', action='')
+                .form-group
+                  input#top-search.form-control(type='text', placeholder='Search for something...', name='top-search')
+            ul.nav.navbar-top-links.navbar-right
+              li
+                span.m-r-sm.text-muted.welcome-message Welcome to MyBlog+
+              li.dropdown
+                a.dropdown-toggle.count-info(data-toggle='dropdown', href='', aria-expanded='false')
+                  i.fa.fa-envelope
+                  span.label.label-warning 1
+                ul.dropdown-menu.dropdown-messages
+                  li
+                    .dropdown-messages-box
+                      a.pull-left
+                        img.img-circle(alt='image', src='img/follower.jpg')
+                      .media-body
+                        strong Testing....
+                        small.text-muted 2018/06/13
+                  li.divider
+                  li
+                    .text-center.link-block
+                      a
+                        i.fa.fa-envelope
+                        strong Read All Messages
+              li
+                a(href='signin')
+                  i.fa.fa-sign-out
+                  |  Log out
+              li
+                a.right-sidebar-toggle
+                  i.fa.fa-tasks
+        .row
+          .col-lg-12
+            .wrapper.wrapper-content
+              .row.row-post
+                .col-lg-4
+                  .ibox.float-e-margins
+                    .ibox-title
+                      h5 Publish Blog
+                      span.label.label-primary MyBlog+
+                    .ibox-content
+                      span.publish-row
+                        span.publish-words Blog Title: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        input#title.profile-input
+                      span.publish-row
+                        span.publish-words Blog Media: &nbsp;&nbsp;&nbsp;&nbsp;
+                        img.publish-img.img-circle(alt='image', src='img/add.jpg')
+                        input(id='updater', type='file', style='display:none;')
+                      span.publish-row
+                        div.publish-words.publish-div Blog Content: &nbsp;&nbsp;
+                        textarea#content.publish-textarea
+                      span.profile-row(style='margin-left: 40%;margin-top:40px;')
+                        input#commit.profile-btn(type='button', value='Commit')
+                        input#cancel.profile-btn(type='button', value='Cancel')
+
+      script(src='js/publish.js')

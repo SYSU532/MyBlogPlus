@@ -1,4 +1,7 @@
 /* New self-made css properties for MyBlog+ */
+/*
+* Basci Index Page Part 
+*/
 .row-post{
 	width: 295%;
 	margin-left: 10px;
@@ -43,4 +46,347 @@
 
 .btn-bottom{
 	margin-bottom: 50px;
+}
+
+.post-item{
+	cursor: pointer;
+}
+
+.post-item:hover{
+	background-color: #ECECEC;
+}
+
+/*
+* User Profile Page Part 
+*/
+.profile-img{
+	height: 150px;
+	width: 150px;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.profile-img:hover{
+	transform: scale(1.05);
+}
+
+.profile-row{
+	display: inline-block;
+	margin-left: 35%;
+	margin-bottom: 50px;
+	width: 600px;
+}
+
+.profile-words{
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.profile-input{
+	width: 250px;
+	height: 25px;
+	border-radius: 5px;
+	border: 2px solid #ECECEC;
+}
+
+.profile-btn{
+	margin-right: 100px;
+	height: 50px;
+	width: 100px;
+	font-size: 14px;
+	color: white;
+	border-radius: 15px;
+	border: 2px green;
+	background-color: #18a689;
+	outline: none;
+	transition: all 0.5s;
+}
+
+.profile-btn:hover{
+	transform: scale(1.1);
+	background-color: #0099CC;
+}
+
+/*
+* Publish Page Part 
+*/
+.publish-words{
+	font-size: 15px;
+}
+
+.publish-row{
+	display: inline-block;
+	margin-left: 38%;
+	margin-bottom: 50px;
+	width: 600px;
+}
+
+.publish-img{
+	border: 2px solid #18a689;
+	margin-left: 50px;
+	height: 140px;
+	width: 140px;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.publish-img:hover{
+	transform: scale(1.05);
+}
+
+.publish-textarea{
+	height: 300px;
+	width: 250px;
+	border-radius: 5px;
+	border: 2px solid #ECECEC;
+	overflow: hidden;
+	resize: none;
+}
+
+.publish-div{
+	height: 100px;
+	width: 110px;
+	float: left;
+	margin-top: 130px;
+}
+
+/*
+* Friends Page Part 
+*/
+.friends-row{
+	border: 1px solid #ECECEC;
+	border-radius: 10px;
+	margin-left: 2%;
+	height: 80px;
+	width: 300px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+.friends-row:hover{
+	background-color: #ECECEC;
+}
+
+.friends-img{
+	height: 70px;
+	width: 70px;
+	margin-left: 15px;
+	margin-top: 5px;
+}
+
+.friends-name{
+	font-size: 17px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+.friends-title{
+	text-align: center;
+	line-height: 50px;
+	border-radius: 10px;
+	margin-left: 2%;
+	height: 50px;
+	width: 300px;
+	margin-bottom: 10px;
+	background-color: #F3F3F4;
+	border-bottom: 8px solid white;
+}
+
+.friends-left{
+	float: left;
+	width: 350px;
+	height: 100%;
+}
+
+.friends-right{
+	float: left;
+	left: 20px;
+	padding-right: 35px;
+	padding-left: 38px;
+	border-radius: 30px;
+}
+
+.chat-panel{
+	background-color: #F3F3F4;
+	width: 900px;
+	height: 400px;
+}
+
+.send-panel{
+	background-color: #F3F3F4;
+	border-top: 1px solid #18a689;
+	width: 900px;
+	height: 250px;
+}
+
+.talk-friend{
+	text-align: center;
+	line-height: 30px;
+	border-bottom: 0.1px solid #18a689;
+	height: 30px;
+	width: 900px;
+	background-color: #F3F3F4; 
+}
+
+.friends-words{
+	font-size: 15px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+.send-row{
+	height: 30px;
+	width: 100%;
+}
+
+.friends-textarea{
+	background-color: #F3F3F4;
+	height: 150px;
+	width: 100%;
+	margin-top: 5px;
+	overflow: hidden;
+	resize: none;
+	border: none;
+	outline: none;
+	font-size: 16px;
+}
+
+.friend-item{
+	top: 22%;
+	left: 15%;
+}
+
+/*
+* Search Friends and Emails Part
+*/
+.search-left{
+	float: left;
+	top: 20px;
+	width: 600px;
+	height: 100%;
+}
+
+.search-right{
+	float: left;
+	top: 20px;
+	width: 724px;
+	height: 100%;
+}
+
+.search-input{
+	margin-left: 50px;
+	width: 350px;
+	height: 35px;
+	border-radius: 10px;
+	outline: none;
+	border: 2px solid #ECECEC;
+	background-color: #EEEEEE;
+	text-align: center;
+}
+
+.search-btn{
+	margin-left: 20px;
+	height: 35px;
+	width: 80px;
+	font-size: 14px;
+	color: white;
+	border-radius: 15px;
+	border: 2px green;
+	background-color: #18a689;
+	outline: none;
+	transition: all 0.5s;
+}
+
+.search-btn:hover{
+	transform: scale(1.1);
+	background-color: #0099CC;
+}
+
+.search-title{
+	text-align: center;
+	line-height: 50px;
+	border-radius: 10px;
+	margin-left: 5%;
+	height: 50px;
+	width: 600px;
+	margin-bottom: 10px;
+	background-color: #F3F3F4;
+	border-bottom: 8px solid white;
+}
+
+.search-words{
+	font-size: 15px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+.search-result{
+	width: 450px;
+	height: 150px;
+	background-color: #F3F3F4;
+	margin-left: 50px;
+}
+
+.search-r{
+	text-align: center;
+	line-height: 50px;
+	border-radius: 10px;
+	margin-left: 50px;
+	height: 50px;
+	width: 450px;
+	margin-top: 20px;
+	background-color: #F3F3F4;
+	border-bottom: 3px solid #ECECEC;
+}
+
+.search-item{
+	top: 60%;
+	left: 20%;
+}
+
+.f-request{
+	padding: 8px;
+}
+
+/*
+* Details Page Style
+*/
+.details-left{
+	float: left;
+	font-size: 30px;
+	font-family: "Times New Roman",Georgia,Serif;
+	font-style: italic;
+	padding: 60px;
+	width: 500px;
+}
+
+.details-right{
+	float: left;
+	padding: 40px;
+	width: 800px;
+	margin-left: 23px;
+}
+
+.details-bottom{
+	float: left;
+	width: 100%;
+}
+
+.details-img{
+	height: 320px;
+	width: 650px;
+}
+
+.details-head{
+	font-size: 30px;
+	font-family: "Times New Roman",Georgia,Serif;
+	font-style: italic;
+	padding: 60px;
+}
+
+.details-content{
+	font-size: 20px;
+	font-family: "Times New Roman",Georgia,Serif;
+	padding-left: 60px;
+	padding-top: 20px;
 }

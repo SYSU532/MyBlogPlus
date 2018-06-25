@@ -1,0 +1,66 @@
+extends base
+
+block title
+  title MyBlog+ | Search
+
+block body
+      #page-wrapper.gray-bg.dashbard-1(style='min-height: 898px;')
+        .row.border-bottom
+          nav.navbar.navbar-static-top(role='navigation', style='margin-bottom: 0')
+            .navbar-header
+              a.navbar-minimalize.minimalize-styl-2.btn.btn-primary
+                i.fa.fa-bars
+              form.navbar-form-custom(role='search', action='')
+                .form-group
+                  input#top-search.form-control(type='text', placeholder='Search for something...', name='top-search')
+            ul.nav.navbar-top-links.navbar-right
+              li
+                span.m-r-sm.text-muted.welcome-message Welcome to MyBlog+
+              li.dropdown
+                a.dropdown-toggle.count-info(data-toggle='dropdown', href='', aria-expanded='false')
+                  i.fa.fa-envelope
+                  span.label.label-warning 1
+                ul.dropdown-menu.dropdown-messages
+                  li
+                    .dropdown-messages-box
+                      a.pull-left
+                        img.img-circle(alt='image', src='img/follower.jpg')
+                      .media-body
+                        strong Testing....
+                        small.text-muted 2018/06/13
+                  li.divider
+                  li
+                    .text-center.link-block
+                      a
+                        i.fa.fa-envelope
+                        strong Read All Messages
+              li
+                a(href='signin')
+                  i.fa.fa-sign-out
+                  |  Log out
+              li
+                a.right-sidebar-toggle
+                  i.fa.fa-tasks
+        .row
+          .col-lg-12
+            .wrapper.wrapper-content
+              .row.row-post
+                .col-lg-4
+                  .ibox.float-e-margins
+                    .ibox-title
+                      h5 Search New Friend
+                      span.label.label-primary MyBlog+
+                    .ibox-content(style='float:left;')
+                      .search-left
+                        input#search.search-input(placeholder='New Friend Name')
+                        input#search-friend-btn.search-btn(type='button', value='Search')
+                        .search-r
+                          span.search-words Search Result
+                        .search-result
+                      .search-right
+                        .search-title
+                          span.search-words All Mails
+                        .all-mails
+                      
+
+      script(src='js/search.js')
