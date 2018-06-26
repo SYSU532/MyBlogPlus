@@ -56,6 +56,12 @@
 	background-color: #ECECEC;
 }
 
+.base-btn{
+	margin-bottom: 10px;
+	padding-left: 5px;
+	font-size: 14px;
+}
+
 /*
 * User Profile Page Part 
 */
@@ -308,7 +314,7 @@
 	border-radius: 10px;
 	margin-left: 5%;
 	height: 50px;
-	width: 600px;
+	width: 90%;
 	margin-bottom: 10px;
 	background-color: #F3F3F4;
 	border-bottom: 8px solid white;
@@ -389,4 +395,55 @@
 	font-family: "Times New Roman",Georgia,Serif;
 	padding-left: 60px;
 	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.comment-send{
+	padding-top: 50px;
+	width: 100%;
+	height: 100px;
+	margin-left: 4%;
+}
+
+.details-input{
+	float: left;
+	background-color: #ECECEC;
+	width: 1000px;
+	padding-right: 100px;
+}
+
+.send-box{
+	padding-left:60px;
+	float:left;
+	margin-top: -10px;
+}
+
+.comments-block{
+	height: 100%;
+	width: 90%;
+	background-color: #ECECEC;
+	border-radius: 30px;
+	margin-left: 50px;
+	transition: all 1s;
+}
+
+.comments-item{
+	height: 80px;
+	width: 90%;
+	padding: 10px;
+	margin-left: 50px;
+	background-color: #ECECEC;
+}
+
+.details-words{
+	font-size: 17px;
+	margin-left: 10px;
+}
+
+.details-label{
+	margin-right: 8px;
+	background-color: #18a689;
+	border-radius: 5px;
+	padding: 3px 4px;
+	font-size: 20px;
 }

@@ -17,7 +17,7 @@ $(document).ready(function(){
            
         _show: function(title, msg, value, type, callback){  
             var _html = "";  
-            _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit">' + title + '</span>';  
+            _html += '<div id="mb_box"></div><div id="mb_con" style="display:none;"><span id="mb_tit">' + title + '</span>';  
             _html += '<div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';  
             if (type == "alert") {  
                 _html += '<input id="mb_btn_ok" type="button" value="确定" />';  
@@ -29,7 +29,9 @@ $(document).ready(function(){
             _html += '</div></div>';  
            
             //必须先将_html添加到body，再设置Css样式  
-            $("body").append(_html); GenerateCss();  
+            $("body").append(_html);
+            GenerateCss();
+            $("#mb_con").fadeIn();
    
             switch(type){  
                 case 'alert':  
@@ -58,8 +60,8 @@ $(document).ready(function(){
                 break;
             }
         },  
-        _hide: function(){  
-             $("#mb_box,#mb_con").remove();  
+        _hide: function(){
+             $("#mb_box,#mb_con").remove();
         }  
     }  
     // Shortuct functions  

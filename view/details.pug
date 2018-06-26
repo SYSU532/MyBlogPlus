@@ -4,7 +4,7 @@ block title
   title MyBlog+ | Blog Details
 
 block body
-      #page-wrapper.gray-bg.dashbard-1(style='min-height: 898px;')
+      #page-wrapper.gray-bg.dashbard-1.animated.fadeInUp(style='min-height: 898px;')
         .row.border-bottom
           nav.navbar.navbar-static-top(role='navigation', style='margin-bottom: 0')
             .navbar-header
@@ -52,12 +52,15 @@ block body
                       span.label.label-primary MyBlog+
                     .ibox-content(style='float:left;')
                       .details-left
+                        span.label.details-label 
                         span Title: Test 
                         br
                         br
+                        span.label.details-label 
                         span Editor: Palette Chen
                         br
                         br
+                        span.label.details-label 
                         span Media-Format: Image
                       .details-right
                         img.details-img(alt='image', src='img/follower.jpg')
@@ -67,6 +70,22 @@ block body
                         br
                         .details-content
                           p First Test Message ~~~~
+                        span.details-head Comments
+                        .comments-block
+                          .comments-item
+                            img.img-circle(alt="img", src="img/follower.jpg", style='height:60px;width:60px;')
+                            span.details-words Follower 1 : &nbsp;&nbsp;&nbsp;&nbsp;Great Picture!
+                        .comment-send
+                          .lead.emoji-picker-container(style='float:left;')
+                            input#send-comment.details-input(data-emojiable="true", type="text")
+                          div.send-box
+                            input#send-commit.profile-btn(type='button', value='Send')
+                        
+
                       
 
       script(src='js/details.js')
+      script(src='js/config.js')
+      script(src='js/util.js')
+      script(src='js/jquery.emojiarea.js')
+      script(src='js/emoji-picker.js')
