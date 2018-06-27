@@ -1,87 +1,77 @@
 extends base
 
 block title 
-  title MyBlog+ | Index
+    title MyBlog+ | Index
 
 block body
     #page-wrapper.gray-bg.dashbard-1.animated.fadeInUp(style='min-height: 898px;')
         .row.border-bottom
-          nav.navbar.navbar-static-top(role='navigation', style='margin-bottom: 0')
-            .navbar-header
-              a.navbar-minimalize.minimalize-styl-2.btn.btn-primary
-                i.fa.fa-bars
-              form.navbar-form-custom(role='search', action='')
-                .form-group
-                  input#top-search.form-control(type='text', placeholder='Search for something...', name='top-search')
-            ul.nav.navbar-top-links.navbar-right
-              li
-                span.m-r-sm.text-muted.welcome-message Welcome to MyBlog+
-              li.dropdown
-                a.dropdown-toggle.count-info(data-toggle='dropdown', href='', aria-expanded='false')
-                  i.fa.fa-envelope
-                  span.label.label-warning 1
-                ul.dropdown-menu.dropdown-messages
-                  li
-                    .dropdown-messages-box
-                      a.pull-left
-                        img.img-circle(alt='image', src='img/follower.jpg')
-                      .media-body
-                        strong Testing....
-                        small.text-muted 2018/06/13
-                  li.divider
-                  li
-                    .text-center.link-block
-                      a
-                        i.fa.fa-envelope
-                        strong Read All Messages
-              li
-                a(href='signin')
-                  i.fa.fa-sign-out
-                  |  Log out
-              li
-                a.right-sidebar-toggle
-                  i.fa.fa-tasks
+            nav.navbar.navbar-static-top(role='navigation', style='margin-bottom: 0')
+                .navbar-header
+                    a.navbar-minimalize.minimalize-styl-2.btn.btn-primary
+                        i.fa.fa-bars
+                    form.navbar-form-custom(role='search', action='')
+                        .form-group
+                            input#top-search.form-control(type='text', placeholder='Search for something...', name='top-search')
+                ul.nav.navbar-top-links.navbar-right
+                    li
+                        span.m-r-sm.text-muted.welcome-message Welcome to MyBlog+
+                    li.dropdown
+                        a.dropdown-toggle.count-info(data-toggle='dropdown', href='', aria-expanded='false')
+                            i.fa.fa-envelope
+                            span.label.label-warning 1
+                        ul.dropdown-menu.dropdown-messages
+                            li
+                                .dropdown-messages-box
+                                    a.pull-left
+                                        img.img-circle(alt='image', src='img/follower.jpg')
+                                    .media-body
+                                        strong Testing....
+                                        small.text-muted 2018/06/13
+                            li.divider
+                            li
+                                .text-center.link-block
+                                    a
+                                        i.fa.fa-envelope
+                                        strong Read All Messages
+                    li
+                        a(href='signin')
+                            i.fa.fa-sign-out
+                            |  Log out
+                    li
+                        a.right-sidebar-toggle
+                            i.fa.fa-tasks
         .row
-          .col-lg-12
-            .wrapper.wrapper-content
-              .row.row-post
-                .col-lg-4
-                  .ibox.float-e-margins
-                    .ibox-title
-                      h5 Test
-                      span.label.label-primary MyBlog+
-                      h5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editor: Palette Chen
-                      .ibox-tools
-                        a.collapse-link
-                          i.fa.fa-chevron-up
-                        a.close-link
-                          i.fa.fa-times
-                    .ibox-content.post-item
-                      div
-                        h4 First Test Message~~~~
-                      i.fa.fa-comments.comments
-                      i.fa.fa-thumbs-o-up.thumbs
-              .row.row-post
-                .col-lg-4
-                  .ibox.float-e-margins
-                    .ibox-title
-                      h5 Test
-                      span.label.label-primary MyBlog+
-                      h5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editor: Palette Chen
-                      .ibox-tools
-                        a.collapse-link
-                          i.fa.fa-chevron-up
-                        a.close-link
-                          i.fa.fa-times
-                    .ibox-content.post-item
-                      div
-                        h4 Second Test Message~~~~
-                      i.fa.fa-comments.comments
-                      i.fa.fa-thumbs-o-up.thumbs
-            .footer
-              .pull-right
-                | Github @ SYSU532
-              div
-                | MyBlog+ 2018-2020
+            .col-lg-12
+                .wrapper.wrapper-content(id='postList')
+                    .row.row-post(v-for='item of items')
+                        .col-lg-4
+                            .ibox.float-e-margins
+                                .ibox-title
+                                    h5 {{ title }}
+                                    span.label.label-primary MyBlog+
+                                    h5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editor: {{ editor }}
+                                    .ibox-tools
+                                        a.collapse-link
+                                            i.fa.fa-chevron-up
+                                        a.close-link
+                                            i.fa.fa-times
+                                .ibox-content.post-item
+                                    div
+                                        h4 First Test Message~~~~
+                                    i.fa.fa-comments.comments
+                                    i.fa.fa-thumbs-o-up.thumbs
+                .footer
+                    .pull-right
+                        | Github @ SYSU532
+                    div
+                        | MyBlog+ 2018-2020
+
+    #alert
+        #fail_alert.alert.alert-danger.hide
+            button.close(data-dismiss='alert') &times;
+            button#down.btn.btn-default.dropdown-toggle(data-toggle="dropdown") Login Error !&nbsp;&nbsp;&nbsp;
+                span.caret
+            ul#error-menu.dropdown-menu(role='menu')
 
     script(src='js/index.js')

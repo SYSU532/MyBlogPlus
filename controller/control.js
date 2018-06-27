@@ -78,8 +78,17 @@ exports.Logup = async function(username, pass, rePass, userImage, imgType, phone
     return res;
 }
 
-exports.Data = async function(username, pass, id){
-    var userTest = await model.TestLogIn(username, pass);
+exports.Data = async function(username, pass, id, ctx){
+    var userTest = false;
+    if (!!ctx.session) {
+        var currUser = ctx.session.username;
+        if (currUser) {
+            userTest = true;
+            console.log(currUser);
+        }
+    }
+    if (!userTest && !!username && !!pass)
+        userTest = await model.TestLogIn(username, pass);
     var res = {
         'code' : 0, // Boolean
         'editor' : null,
