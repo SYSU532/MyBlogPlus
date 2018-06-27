@@ -12,10 +12,10 @@ html
     link(href="css/plugins/iCheck/custom.css" rel="stylesheet")
     link(href='css/myblog+.css', rel='stylesheet')
 
-
-  block body
-  
   script(src='js/jquery-2.1.1.js')
+  
+  
+  script(src='js/alert.js')
   script(src='js/bootstrap.min.js')
     // iCheck
   script(src='js/plugins/iCheck/icheck.min.js')
@@ -26,3 +26,10 @@ html
       radioClass: 'iradio_square-green',
       });
       });
+  #alert
+    #fail_alert.alert.alert-danger.hide
+      button.close(data-dismiss='alert') &times;
+      button#down.btn.btn-default.dropdown-toggle(data-toggle="dropdown") Login Error !&nbsp;&nbsp;&nbsp;
+        span.caret
+      ul#error-menu.dropdown-menu(role='menu')
+  block body

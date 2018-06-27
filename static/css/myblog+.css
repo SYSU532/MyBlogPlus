@@ -62,6 +62,32 @@
 	font-size: 14px;
 }
 
+#alert{
+	position: fixed;
+	right: 20px;
+	top: 10px;
+	height: 40px;
+	width: 250px;
+	transform: all 1s;
+  }
+  
+  #fail_alert{
+	float: right;
+	right: 20px;
+	height: 60px;
+	width: 250px;
+  }
+  
+  #down{
+	right: 20px;
+	width: 200px;
+	background-color: #f2dede;
+	margin-top: -5px;
+	margin-left: -10px;
+	color: darkred;
+	font-weight: bolder;
+	border: none;
+  }
 /*
 * User Profile Page Part 
 */
