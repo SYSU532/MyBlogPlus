@@ -64,6 +64,7 @@ router.post('/data', async (ctx, next)=>{
         'comments' : dataRes2
     };
     var errBack = {
+        'code': dataRes['code'],
         'errMessage' : 'Invalid user or password!'
     };
     if(dataRes['code']){

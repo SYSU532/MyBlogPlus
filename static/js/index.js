@@ -18,7 +18,7 @@ $(document).ready(function(){
     $(".post-item").click(function(){
         window.location.href = '/details';
     });
-
+    initList();
 
 });
 
@@ -50,10 +50,10 @@ let postIDs = [];
 function initList() {
     vuePostList.$http.post(allPostAPI).then(function (response) {
         postIDs = response.body.postIDs;
-        for (let id in postIDs) {
-            vuePostList.$http.post(getPostAPI, {}).then(function (response) {
+        for (let id of postIDs) {
+            vuePostList.$http.post(getPostAPI, {id: id}).then(function (response) {
                 if (response.body.code === 0) {
-                    showError('Error Loading Post: ' + response.body.errMessage);
+                    myAlert("Loading Error", response.body.errMessage);
                 }
                 else if (response.body.code === 1) {
                     let newPost = {};

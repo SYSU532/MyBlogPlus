@@ -81,10 +81,9 @@ exports.Logup = async function(username, pass, rePass, userImage, imgType, phone
 exports.Data = async function(username, pass, id, ctx){
     var userTest = false;
     if (!!ctx.session) {
-        var currUser = ctx.session.username;
+        var currUser = ctx.session.user;
         if (currUser) {
             userTest = true;
-            console.log(currUser);
         }
     }
     if (!userTest && !!username && !!pass)
@@ -99,7 +98,7 @@ exports.Data = async function(username, pass, id, ctx){
         'thumbsNum' : 0, // Int
         'comments' : {} // JSON, key: comment User name, value: comment message
     };
-    if(userTest === 1){
+    if(userTest){
         res['code'] = 1;
         var data = await model.ViewSinglePost(id);
         res.contentData = data[0]; 
