@@ -185,7 +185,7 @@ $(document).ready(function () {
 
 // Minimalize menu when screen is less than 768px
 $(window).bind("resize", function () {
-    if ($(this).width() < 769) {
+    if ($(this).width() < 1000) {
         $('body').addClass('body-small')
     } else {
         $('body').removeClass('body-small')
@@ -204,6 +204,7 @@ $(document).ready(function () {
         var fixedfooter = localStorage.getItem("fixedfooter");
 
         var body = $('body');
+        body.css('min-width', '1000');
 
         if (fixedsidebar == 'on') {
             body.addClass('fixed-sidebar');
