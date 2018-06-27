@@ -14,15 +14,25 @@ block body
       p Create account to see it in action.
       form.m-t(role='form', action='signin')
           .form-group
-            input.form-control(type='text', placeholder='Name', required='')
+            input#user.form-control(type='text', placeholder='Name', data-toggle="tooltip",
+            title="UserName consists of 6-18 letters or numbers, and must begin with letter", data-placement="right", data-trigger="hover")
+            #user-tip.tip
           .form-group
-            input.form-control(type='password', placeholder='Password', required='')
+            input#pass.form-control(type='password', placeholder='Password', data-toggle="tooltip",
+            title="Password consists of 6-12 letters or numbers", data-placement="right", data-trigger="hover")
+            #pass-tip.tip
           .form-group
-            input.form-control(type='password', placeholder='Again Password', required='')
+            input#re-pass.form-control(type='password', placeholder='Again Password', data-toggle="tooltip",
+            title="Again Password must be equal to last Password", data-placement="right", data-trigger="hover")
+            #re-pass-tip.tip
           .form-group
-            input.form-control(type='text', placeholder='Phone Number', required='')
+            input#phone.form-control(type='text', placeholder='Phone Number', data-toggle="tooltip",
+            title="Phone number consists of 11 numbers, and cannot start with zero", data-placement="right", data-trigger="hover")
+            #phone-tip.tip
           .form-group
-            input.form-control(type='email', placeholder='Email', required='')
+            input#email.form-control(type='email', placeholder='Email', data-toggle="tooltip",
+            title="Email format must be XXX@XXX.XXX", data-placement="right", data-trigger="hover")
+            #email-tip.tip
           
           .form-group
             .checkbox.i-checks
@@ -34,4 +44,5 @@ block body
           p.text-muted.text-center
             h5 Already have an account?
           a.btn.btn-sm.btn-white.btn-block.btn-bottom(href='signin') Login
-
+    
+    script(src="js/logup.js")

@@ -88,6 +88,22 @@
 	font-weight: bolder;
 	border: none;
   }
+
+  .tooltip{
+	  width: 200px;
+  }
+
+  .tip{
+	position: absolute;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-weight: bolder;
+	font-size: 18px;
+	margin-left: 150px;
+	margin-top: -35px;
+  }
+
 /*
 * User Profile Page Part 
 */
