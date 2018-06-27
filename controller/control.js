@@ -2,7 +2,7 @@
 * Controller.js
 */
 'use strict'
-const model = require('../model/model');
+const model = require('../model/model.js');
 
 exports.Login = async function(username, pass){
     var result = {
