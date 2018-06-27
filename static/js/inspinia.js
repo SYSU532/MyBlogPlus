@@ -240,6 +240,8 @@ $(document).ready(function () {
             $(".footer").addClass('fixed');
         }
     }
+
+    $("#hide-evil").css('width', $(window).width()*0.62);
 });
 
 // check if browser support HTML5 local storage
