@@ -44,9 +44,9 @@ var insertTalk = 'INSERT INTO talks(user, content) VALUES(?,?)';
 var allTalk = 'SELECT * FROM talks';
 
 exports.InsertUser = function(username, pass, userImageUrl, phone, email){
-    /* 
-    *  -3 for username already exists, -2 for rePass not equal to pass, 
-    *  -1 for phone already exists, 0 for email alreadt exists, 
+    /*
+    *  -3 for username already exists, -2 for rePass not equal to pass,
+    *  -1 for phone already exists, 0 for email alreadt exists,
     *  1 for success
     */
     var userParam = [username, pass, userImageUrl, phone, email];
@@ -102,7 +102,7 @@ exports.ModifyUserInfo = function(username, newUserImage, imgType, newPhone, new
         updateParam = [newPhone, newEmail, username+imgType, username];
         updateSen = updateUser2;
     }
-    
+
     connection.query(updateSen, updateParam, function(err, result){
         if(err) throw err;
     });
@@ -201,7 +201,7 @@ exports.AddComments = async function(username, id){
     })
 }
 
-exports.StoreUserImg = function(userImage, imageUrl){   
+exports.StoreUserImg = function(userImage, imageUrl){
     var buff = new Buffer(userImage, 'ascii');
     var trueImageUrl = 'img/' + imageUrl;
     fs.writeFileSync(trueImageUrl, buff);

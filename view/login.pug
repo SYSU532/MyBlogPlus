@@ -1,26 +1,29 @@
 extends log_base
 
 block title
-  title MyBlog+ | Login
+    title MyBlog+ | Login
 
 block body
-  body.gray-bg
-    .middle-box.text-center.loginscreen.animated.fadeInDown
-      div
-        div.logo-theme
-          h3.logo-name MyBlog+
-        h4 Welcome to MyBlog+
-        p Login in. And begin the traveling in blogs.
-        form.m-t(role='form', action='index')
-          .form-group
-            input.form-control(type='text', placeholder='Username', required='')
-          .form-group
-            input.form-control(type='password', placeholder='Password', required='')
-          button.btn.btn-primary.block.full-width.m-b(type='submit') Login
-          a
-            h5 Forgot password?
-          p.text-muted.text-center
-            h5 Do not have an account?
-          a.btn.btn-sm.btn-white.btn-block(href='signup') Create an account
+    body.gray-bg
+        .middle-box.text-center.loginscreen.animated.fadeInDown
+            div
+                div.logo-theme
+                    h3.logo-name MyBlog+
+                h4 Welcome to MyBlog+
+                p Login in. And begin the traveling in blogs.
+                form.m-t(role='form', id='info-area', v-on:submit='login', onsubmit='return false')
+                    .form-group
+                        input.form-control(type='text', placeholder='Username', required='', v-model='username')
+                    .form-group
+                        input.form-control(type='password', placeholder='Password', required='', v-model='password')
+                    button.btn.btn-primary.block.full-width.m-b(type='submit') Login
+                    a
+                        h5 Forgot password?
+                    p.text-muted.text-center
+                        h5 Do not have an account?
+                    a.btn.btn-sm.btn-white.btn-block(href='signup') Create an account
 
-    script(src='js/login.js')
+
+        script(src='js/login.js')
+
+

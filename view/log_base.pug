@@ -1,35 +1,37 @@
 doctype html
 html
-  head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    block title
-    link(href="img/icon1.png", rel="icon", type="image/png")
-    link(href='css/bootstrap.min.css', rel='stylesheet')
-    link(href='font-awesome/css/font-awesome.css', rel='stylesheet')
-    link(href='css/animate.css', rel='stylesheet')
-    link(href='css/style.css', rel='stylesheet')
-    link(href="css/plugins/iCheck/custom.css" rel="stylesheet")
-    link(href='css/myblog+.css', rel='stylesheet')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        block title
+        link(href="img/icon1.png", rel="icon", type="image/png")
+        link(href='css/bootstrap.min.css', rel='stylesheet')
+        link(href='font-awesome/css/font-awesome.css', rel='stylesheet')
+        link(href='css/animate.css', rel='stylesheet')
+        link(href='css/style.css', rel='stylesheet')
+        link(href="css/plugins/iCheck/custom.css" rel="stylesheet")
+        link(href='css/myblog+.css', rel='stylesheet')
+        script(src='js/jquery-2.1.1.js')
+        script(src='js/vue.js')
+        script(src='js/alert.js')
+        script(src='js/bootstrap.min.js')
+        script(src='js/vue-resource.js')
+        script(src='js/vue-router.js')
 
-  script(src='js/jquery-2.1.1.js')
-  
-  
-  script(src='js/alert.js')
-  script(src='js/bootstrap.min.js')
-    // iCheck
-  script(src='js/plugins/iCheck/icheck.min.js')
-  script.
-      $(document).ready(function(){
-      $('.i-checks').iCheck({
-      checkboxClass: 'icheckbox_square-green',
-      radioClass: 'iradio_square-green',
-      });
-      });
-  #alert
-    #fail_alert.alert.alert-danger.hide
-      button.close(data-dismiss='alert') &times;
-      button#down.btn.btn-default.dropdown-toggle(data-toggle="dropdown") Login Error !&nbsp;&nbsp;&nbsp;
-        span.caret
-      ul#error-menu.dropdown-menu(role='menu')
-  block body
+
+        // iCheck
+    script(src='js/plugins/iCheck/icheck.min.js')
+    script.
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    #alert
+        #fail_alert.alert.alert-danger.hide
+            button.close(data-dismiss='alert') &times;
+            button#down.btn.btn-default.dropdown-toggle(data-toggle="dropdown") Login Error !&nbsp;&nbsp;&nbsp;
+                span.caret
+            ul#error-menu.dropdown-menu(role='menu')
+    block body
