@@ -3,6 +3,7 @@
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+
 function showError(message){
     Bind_alert();
     $('#error-menu').children().remove();
@@ -18,25 +19,17 @@ function Bind_alert(){
 }
 
 
-let v = new Vue({
+let signin = new Vue({
     el: '#info-area',
     data: {
         username: '',
         password: '',
-        apiUrl: '/signin'
+        apiUrl: '/login'
     },
     methods: {
-        login: function () {
+        login: function (){
             uname = this.username;
             pass = this.password;
-            if (uname.length === 0) {
-                showError('Username incomplete!');
-                return;
-            }
-            if (pass.length === 0) {
-                showError('Password incomplete!');
-                return;
-            }
             this.$http.post(this.apiUrl, {name: uname, pass: pass}).then(function (response) {
                 if (response.body.code === 1) {
                     window.location.href = '/index';

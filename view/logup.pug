@@ -9,29 +9,32 @@ block body
     .middle-box.text-center.loginscreen.animated.fadeInDown
       div
        div.logo-theme
-          h3.logo-name MyBlog+
+          h3.logo-name(style="margin-bottom: 30px;") MyBlog+
+       div
+        img#head.img-circle.head-img(alt="Head", src="img/user.jpg")
+        input(id='updater', type='file', style='display:none;')
       h3 Register to MyBlog+
       p Create account to see it in action.
-      form.m-t(role='form', action='signin')
+      form.m-t(role='form', id='info-area', v-on:submit='regist', onsubmit='return false')
           .form-group
             input#user.form-control(type='text', placeholder='Name', data-toggle="tooltip",
-            title="UserName consists of 6-18 letters or numbers, and must begin with letter", data-placement="right", data-trigger="hover")
+            title="UserName consists of 6-18 letters or numbers, and must begin with letter", data-placement="right", data-trigger="hover", v-model="username")
             #user-tip.tip
           .form-group
             input#pass.form-control(type='password', placeholder='Password', data-toggle="tooltip",
-            title="Password consists of 6-12 letters or numbers", data-placement="right", data-trigger="hover")
+            title="Password consists of 6-12 letters or numbers", data-placement="right", data-trigger="hover", v-model="password")
             #pass-tip.tip
           .form-group
             input#re-pass.form-control(type='password', placeholder='Again Password', data-toggle="tooltip",
-            title="Again Password must be equal to last Password", data-placement="right", data-trigger="hover")
+            title="Again Password must be equal to last Password", data-placement="right", data-trigger="hover", v-model="re_password")
             #re-pass-tip.tip
           .form-group
             input#phone.form-control(type='text', placeholder='Phone Number', data-toggle="tooltip",
-            title="Phone number consists of 11 numbers, and cannot start with zero", data-placement="right", data-trigger="hover")
+            title="Phone number consists of 11 numbers, and cannot start with zero", data-placement="right", data-trigger="hover", v-model="phone")
             #phone-tip.tip
           .form-group
             input#email.form-control(type='email', placeholder='Email', data-toggle="tooltip",
-            title="Email format must be XXX@XXX.XXX", data-placement="right", data-trigger="hover")
+            title="Email format must be XXX@XXX.XXX", data-placement="right", data-trigger="hover", v-model="email")
             #email-tip.tip
           
           .form-group
@@ -40,7 +43,7 @@ block body
                 input(type='checkbox')
                 i
                 | Agree the terms and policy
-          button.btn.btn-primary.block.full-width.m-b(type='submit') Register
+          button#signup.btn.btn-primary.block.full-width.m-b(type='submit') Register
           p.text-muted.text-center
             h5 Already have an account?
           a.btn.btn-sm.btn-white.btn-block.btn-bottom(href='signin') Login

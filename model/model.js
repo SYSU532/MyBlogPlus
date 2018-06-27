@@ -8,8 +8,8 @@ const crypto = require('crypto');
 
 const connection = mysql.createConnection({
     host : 'localhost',
-    user : 'knowit',
-    password : 'sysu532',
+    user : 'root',
+    password : '123456',
     database : 'knowit'
 });
 

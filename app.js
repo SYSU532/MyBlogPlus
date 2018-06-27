@@ -17,6 +17,7 @@ const session = require('./controller/sessionControl');
 // Self-Design modules
 const control = require('./controller/control');
 
+
 const app = new Koa();
 app.use(session.session);
 
@@ -36,7 +37,7 @@ app.use(bodyParser({
 /*
 * POST Methods
 */
-router.post('/signin', async(ctx, next) => {
+router.post('/login', async(ctx, next) => {
     var data = ctx.request.body;
     var username = data.name, password = data.pass;
     var loginRes = await control.Login(username, password);
@@ -44,6 +45,19 @@ router.post('/signin', async(ctx, next) => {
         ctx.session = {user: username};
     }
     ctx.response.body = JSON.stringify(loginRes);
+});
+
+router.post('/logup', async(ctx, next) => {
+    var data = ctx.request.body, req = ctx.req;
+    var username = data.name, password = data.pass,
+        imgType = data.imgType, rePass = data.rePass,
+        phone = data.phone, email = data.email;
+    console.log(data.image);
+    var image = await rawBody(req);
+    console.log(image);
+    var logupRes = await control.Logup(username, password, rePass, image, imgType, phone, email);
+    console.log(logupRes);
+    ctx.response.body = JSON.stringify(logupRes);
 });
 
 

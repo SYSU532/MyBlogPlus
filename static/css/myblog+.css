@@ -104,6 +104,17 @@
 	margin-top: -35px;
   }
 
+.head-img{
+	height: 120px;
+	width: 120px;
+	transition: all 1s;
+	cursor: pointer;
+}
+
+.head-img:hover{
+	transform: scale(1.1);
+}
+
 /*
 * User Profile Page Part 
 */
