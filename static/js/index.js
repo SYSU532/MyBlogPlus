@@ -1,20 +1,6 @@
  //index.js
 
-<<<<<<< Updated upstream
 
-$(document).ready(function(){
-   $('#home-btn').css('background-color', 'white');
-
-   setTimeout(function() {
-    toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.success('A website for blogs and talks~', 'Welcome to MyBlog+');
-=======
->>>>>>> Stashed changes
  Vue.use(VueRouter);
  Vue.use(VueResource);
 
@@ -29,13 +15,11 @@ $(document).ready(function(){
                         timeOut: 4000
                     };
                     toastr.success('A website for blogs and talks~', 'Welcome to MyBlog+');
-    
-<<<<<<< Updated upstream
+    });
     $(".post-item").click(function(){
         window.location.href = '/details';
     });
-    initList();
-
+        initList();
 });
 
 let vuePostList = new Vue({
@@ -84,11 +68,3 @@ function initList() {
     })
 }
 
-=======
-                }, 500);
-        
-        $(".post-item").click(function(){
-            window.location.href = '/details';
-        });
-});
->>>>>>> Stashed changes

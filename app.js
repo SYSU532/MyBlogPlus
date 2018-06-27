@@ -60,7 +60,6 @@ router.post('/logup', async(ctx, next) => {
     ctx.response.body = JSON.stringify(logupRes);
 });
 
-<<<<<<< Updated upstream
 
 router.post('/data', async (ctx, next)=>{
     var body = ctx.request.body;
@@ -97,8 +96,6 @@ router.post('/allPostID', async(ctx, next)=>{
     }
     ctx.response.body = jsonBack;
 });
-=======
->>>>>>> Stashed changes
 
 /*
 * GET Methods
