@@ -58,9 +58,6 @@ exports.Logup = async function(username, pass, rePass, userImage, imgType, phone
             case -3:
                 res['errMessage'] += 'Username already exists! ';
                 break;
-            case -2:
-                res['errMessage'] += 'The second password does not equal to first password! ';
-                break;
             case -1:
                 res['errMessage'] += 'Phone number already exists! ';
                 break;
