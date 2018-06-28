@@ -20,6 +20,7 @@ $(document).ready(function(){
         window.location.href = '/details';
     });
         initList();
+        initInfo();
 });
 
 let vuePostList = new Vue({
@@ -27,6 +28,10 @@ let vuePostList = new Vue({
    data: {
        items: []
    }
+});
+
+let vueUserInfo = new Vue({
+    el: 'body'
 });
 
  function showError(message){
@@ -45,6 +50,7 @@ let vuePostList = new Vue({
 
 const allPostAPI = "/allPostID";
 const getPostAPI = "/data";
+const getInfoAPI = "/getUserInfo";
 let postIDs = [];
 
 function initList() {
@@ -66,5 +72,16 @@ function initList() {
             })
         }
     })
+}
+
+function initInfo(){
+    vueUserInfo.$http.post(getInfoAPI).then(function (response) {
+        if(response.body.code === 1){
+            var body = response.body;
+            $("#user-img").attr("src", 'img/' + body.imageUrl);
+            $("#user-img").css("opacity", "1");
+            $("#user-name").html('<strong class="font-bold">' + body.username + '</strong>');
+        }
+    });
 }
 

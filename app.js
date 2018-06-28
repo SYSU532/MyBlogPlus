@@ -45,7 +45,7 @@ router.post('/login', async(ctx, next) => {
     var username = data.name, password = data.pass;
     var loginRes = await control.Login(username, password);
     if (loginRes.code === 1) {
-        ctx.session = {user: username};
+        ctx.session = {user: username, pass: password};
     }
     ctx.response.body = JSON.stringify(loginRes);
 });
@@ -62,19 +62,19 @@ router.post('/logup', async(ctx, next) => {
     }else {
         image = fs.readFileSync('static/img/user.jpg');
     }
-    console.log(image);
     var logupRes = await control.Logup(username, password, rePass, image, imgType, phone, email);
-    console.log(logupRes);
+    if (logupRes.code === 1) {
+        ctx.session = {user: username, pass: password};
+    }
     ctx.response.body = JSON.stringify(logupRes);
 });
 
 
-router.post('/data', async (ctx, next)=>{
+router.post('/data', async (ctx, next) => {
     var body = ctx.request.body;
-    var username = body.name, password = body.pass,
-        postID = body.id;
-    var dataRes = await control.Data(username, password, postID, ctx); // {StateCode, contentData, imageUrl, mediaUrl, thumbStore, messStore}
-    var dataRes2 = await control.AddComments(username, postID);
+    var postID = body.id;
+    var dataRes = await control.Data(postID, ctx); // {StateCode, contentData, imageUrl, mediaUrl, thumbStore, messStore}
+    var dataRes2 = await control.AddComments(ctx.session.user, postID);
     var jsonBack = {
         'code' : dataRes['code'],
         'editor' : dataRes['editor'],
@@ -96,13 +96,20 @@ router.post('/data', async (ctx, next)=>{
     }
 });
 
-router.post('/allPostID', async(ctx, next)=>{
+router.post('/allPostID', async(ctx, next) => {
     var body = ctx.request.body;
     var dataRes = await control.GetPostIDs();
     var jsonBack = {
         "postIDs" : dataRes
     }
     ctx.response.body = jsonBack;
+});
+
+router.post('/getUserInfo', async(ctx, next) => {
+    var username = ctx.session.user;
+    var infoBack = await control.GetInfo(username);
+    console.log(infoBack);
+    ctx.response.body = infoBack;
 });
 
 /*
