@@ -42,12 +42,14 @@ function initInfo(){
     $("#user-name").html('<strong class="font-bold">' + window['localStorage'].username + '</strong>');
 }
 
-function initUserMess(){
+function initUserMess(flag){
     vueUserInfo.$http.post('/getUserInfo').then(function(response){
-        var body = response.body;
+        var body = response.body, time = 0;
         Store = body;
         if(body.code === 1){
-            $("#head-img").attr("src", 'img/' + body.imageUrl);
+            if(flag == undefined){
+                $("#head-img").attr("src", 'img/' + body.imageUrl);
+            }
             $("#username").val(body.username);
             $("#phone").val(body.phone);
             $("#email").val(body.email);
@@ -68,16 +70,19 @@ function onChangeInfo(){
             'Content-Type': 'application/octet-stream'
         },
     }).then(function(response){
-        initUserMess();
+        initUserMess(0);
         window['localStorage'].imageUrl = Store.username + imgType;
-        $("#user-img").attr("src", 'img/' + Store.username + imgType);
+        $("#user-img").css("opacity", '0');
+        setTimeout(function(){
+            $("#user-img").attr("src", 'img/' + Store.username + imgType + '?temp=' + Math.random());
+            $("#user-img").css("opacity", '1');
+        }, 500);
         myAlert('Success', '<br>User Info Change Success');
     });
 }
 
 function onCancel(){
     if(Store.code === 1){
-        $("#head-img").attr("src", 'img/' + Store.imageUrl);
         $("#username").val(Store.username);
         $("#phone").val(Store.phone);
         $("#email").val(Store.email);
