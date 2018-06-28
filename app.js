@@ -111,6 +111,20 @@ router.post('/getUserInfo', async(ctx, next) => {
     ctx.response.body = infoBack;
 });
 
+router.post('/modifyUserInfo', async(ctx, next) => {
+    var username = ctx.session.user, password = ctx.session.pass;
+    var body = ctx.request.query;
+    console.log(body);
+    var newEmail = body.newEmail, newPhone = body.newPhone, imgType = body.imgType;
+    var newImage = '';
+    if(imgType !== ''){
+        newImage = await rawBody(ctx.req);
+    }
+    var modifyRes = await control.ModifyInfo(username, password, newImage, imgType, 
+                                            newPhone, newEmail);
+    ctx.response.body = JSON.stringify(modifyRes);
+});
+
 router.post('/logout', async(ctx, next) => {
     ctx.session = {};
     console.log(ctx.session);

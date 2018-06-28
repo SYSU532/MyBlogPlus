@@ -275,7 +275,7 @@ exports.checkThumbOrNot = async function(username, id){
 
 var changeUserImg = function(newUserImage, userImageUrl){
     var buff = new Buffer(newUserImage, 'ascii');
-    var trueImageUrl = 'img/' + userImageUrl;
+    var trueImageUrl = 'static/img/' + userImageUrl;
     fs.writeFileSync(trueImageUrl, buff, function(err){
         if(err) throw err;
     });
