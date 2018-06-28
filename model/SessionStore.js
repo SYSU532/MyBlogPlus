@@ -20,8 +20,8 @@ const MysqlSession = require('koa-mysql-session')
 // }
 
 exports.store = new MysqlSession({
-    user: 'knowit',
-    password: 'sysu532',
+    user: 'root',
+    password: '123456',
     database: 'knowit',
     host: 'localhost',
 });

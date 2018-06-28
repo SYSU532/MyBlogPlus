@@ -6,12 +6,14 @@
 const Koa = require('koa');
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser');
+const koaBody = require('koa-body');
 const views = require('koa-views');
 const statics = require('koa-static');
 // Other modules
 const path = require('path');
 const ws = require('nodejs-websocket');
 const rawBody = require('raw-body');
+const multer = require('koa-multer');
 const fs = require('fs');
 const session = require('./controller/sessionControl');
 // Self-Design modules
@@ -29,10 +31,11 @@ app.use(views('view', {
 app.use(statics(
     path.join(__dirname, './static')
 ));
-app.use(bodyParser({
+app.use(koaBody({
     formLimit: '100mb',
     multipart: true
 }));
+app.use(bodyParser());
 
 /*
 * POST Methods
@@ -48,12 +51,17 @@ router.post('/login', async(ctx, next) => {
 });
 
 router.post('/logup', async(ctx, next) => {
-    var data = ctx.request.body, req = ctx.req;
+    var data = ctx.request.query, req = ctx.req;
     var username = data.name, password = data.pass,
         imgType = data.imgType, rePass = data.rePass,
-        phone = data.phone, email = data.email;
-    console.log(data.image);
-    var image = await rawBody(req);
+        phone = data.phone, email = data.email, headDefault = data.default;
+    var image = null;
+    console.log(data);
+    if(headDefault == 0){
+        image = await rawBody(ctx.req);
+    }else {
+        image = fs.readFileSync('static/img/user.jpg');
+    }
     console.log(image);
     var logupRes = await control.Logup(username, password, rePass, image, imgType, phone, email);
     console.log(logupRes);
