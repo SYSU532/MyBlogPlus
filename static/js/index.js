@@ -79,9 +79,10 @@ function initInfo(){
         if(response.body.code === 1){
             var body = response.body;
             $("#user-img").attr("src", 'img/' + body.imageUrl);
+            window['localStorage'].imageUrl = body.imageUrl;
+            window['localStorage'].username = body.username;
             $("#user-img").css("opacity", "1");
             $("#user-name").html('<strong class="font-bold">' + body.username + '</strong>');
         }
     });
 }
-

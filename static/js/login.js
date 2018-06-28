@@ -32,7 +32,9 @@ let signin = new Vue({
             pass = this.password;
             this.$http.post(this.apiUrl, {name: uname, pass: pass}).then(function (response) {
                 if (response.body.code === 1) {
-                    window.location.href = '/index';
+                    setTimeout(function(){
+                        window.location.href = '/index';
+                    }, 100);
                 }
                 else if (response.body.code === 0) {
                     showError(response.body.errMessage)

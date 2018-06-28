@@ -47,6 +47,7 @@ router.post('/login', async(ctx, next) => {
     if (loginRes.code === 1) {
         ctx.session = {user: username, pass: password};
     }
+    console.log(ctx.session);
     ctx.response.body = JSON.stringify(loginRes);
 });
 
@@ -56,7 +57,6 @@ router.post('/logup', async(ctx, next) => {
         imgType = data.imgType, rePass = data.rePass,
         phone = data.phone, email = data.email, headDefault = data.default;
     var image = null;
-    console.log(data);
     if(headDefault == 0){
         image = await rawBody(ctx.req);
     }else {
@@ -108,15 +108,36 @@ router.post('/allPostID', async(ctx, next) => {
 router.post('/getUserInfo', async(ctx, next) => {
     var username = ctx.session.user;
     var infoBack = await control.GetInfo(username);
-    console.log(infoBack);
     ctx.response.body = infoBack;
+});
+
+router.post('/logout', async(ctx, next) => {
+    ctx.session = {};
+    console.log(ctx.session);
+    ctx.response.body = {};
 });
 
 /*
 * GET Methods
 */
-router.get('/', async(ctx, next) => {await ctx.render('login');});
-router.get('/index', async(ctx, next) => {await ctx.render('index');});
+router.get('/', async(ctx, next) => {
+    var session = ctx.session;
+    console.log('/ ' + session.user);
+    if(session.user === undefined){
+        await ctx.render('login');
+    }else {
+        await ctx.redirect('index');
+    }
+});
+router.get('/index', async(ctx, next) => {
+    var session = ctx.session;
+    console.log('/index' + ctx.session.user);
+    if(session.user === undefined){
+        await ctx.redirect('/');
+    }else {
+        await ctx.render('index');
+    }
+});
 router.get('/signin', async(ctx, next) => {await ctx.render('login');});
 router.get('/signup', async(ctx, next) => {await ctx.render('logup');});
 router.get('/user', async(ctx, next) => {await ctx.render('user');});

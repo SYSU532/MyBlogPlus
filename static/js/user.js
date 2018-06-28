@@ -12,9 +12,16 @@ $(document).ready(function(){
         if(fileObj && fileObj.files && fileObj.files[0]){
             $(".profile-img").attr('src', window.URL.createObjectURL(fileObj.files[0]));
         }
-    })
+    });
+    initInfo();
 });
 
 function update_img(){
     $('#updater').trigger('click');
+}
+
+function initInfo(){
+    $("#user-img").attr("src", 'img/' + window['localStorage'].imageUrl);
+    $("#user-img").css("opacity", "1");
+    $("#user-name").html('<strong class="font-bold">' + window['localStorage'].username + '</strong>');
 }
