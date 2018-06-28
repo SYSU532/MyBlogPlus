@@ -75,16 +75,14 @@ exports.Logup = async function(username, pass, rePass, userImage, imgType, phone
     return res;
 }
 
-exports.Data = async function(username, pass, id, ctx){
+exports.Data = async function(id, ctx){
     var userTest = false;
-    if (!!ctx.session) {
-        var currUser = ctx.session.user;
-        if (currUser) {
-            userTest = true;
-        }
+    if (ctx.session) {
+        var currUser = ctx.session.user, currPass = ctx.session.pass;
+        console.log(currUser);
+        userTest = await model.TestLogIn(currUser, currPass);
+        console.log(userTest);
     }
-    if (!userTest && !!username && !!pass)
-        userTest = await model.TestLogIn(username, pass);
     var res = {
         'code' : 0, // Boolean
         'editor' : null,
@@ -95,7 +93,7 @@ exports.Data = async function(username, pass, id, ctx){
         'thumbsNum' : 0, // Int
         'comments' : {} // JSON, key: comment User name, value: comment message
     };
-    if(userTest){
+    if(userTest == 1){
         res['code'] = 1;
         var data = await model.ViewSinglePost(id);
         res.contentData = data[0]; 
@@ -224,6 +222,7 @@ exports.GetInfo = async function(username){
             'phone' : data['phone'],
             'email' : data['email'],
             'imageUrl' : data['image'],
+            'username' : username,
             'errMessage' : ''
         };
     }else {

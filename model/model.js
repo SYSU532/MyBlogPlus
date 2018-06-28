@@ -208,13 +208,13 @@ exports.AddComments = async function(username, id){
 
 exports.StoreUserImg = function(userImage, imageUrl){
     var buff = new Buffer(userImage, 'ascii');
-    var trueImageUrl = 'img/' + imageUrl;
-    fs.writeFileSync(trueImageUrl, buff);
+    var trueImageUrl = 'static/img/' + imageUrl;
+    fs.writeFileSync(trueImageUrl, userImage);
 }
 
 exports.StorePostImg = function(imageUrl, imageStream){
     var buff = new Buffer(imageStream, 'ascii');
-    var trueImageUrl = 'img/' + imageUrl;
+    var trueImageUrl = 'static/img/' + imageUrl;
     fs.writeFileSync(trueImageUrl, buff, function(err){
         if(err) throw err;
     });
@@ -222,7 +222,7 @@ exports.StorePostImg = function(imageUrl, imageStream){
 
 exports.StorePostMedia = function(mediaUrl, mediaStream){
     var buff = new Buffer(mediaStream, 'ascii');
-    var trueMediaUrl = 'img/' + mediaUrl;
+    var trueMediaUrl = 'static/img/' + mediaUrl;
     fs.writeFileSync(trueMediaUrl, buff, function(err){
         if(err) throw err;
     });

@@ -35,13 +35,13 @@ html
             li.nav-header
               .dropdown.profile-element
                 span
-                  img.img-circle(alt='image', src='img/user.jpg')
+                  img#user-img.img-circle(alt='image', src='img/user.jpg', style="opacity:0;")
                 a.dropdown-toggle(data-toggle='dropdown', href=' ')
                   span.clear
-                    span.block.m-t-xs
+                    span#user-name.block.m-t-xs
                       strong.font-bold Palette Chen
                     span.text-muted.text-xs.block
-                      | Stranger
+                      | Blog User
                       b.caret
                 ul.dropdown-menu.animated.fadeInRight.m-t-xs
                   li

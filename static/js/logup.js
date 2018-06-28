@@ -6,7 +6,8 @@ var username = /^[a-zA-Z][a-zA-z0-9\_]{5,17}/, phone = /^[1-9][0-9]{10}$/;
 var mail = /^[a-zA-Z0-9\_\-]+@(([a-zA-Z0-9\_\-])+\.)+[a-zA-Z]{2,4}$/, password = /^[0-9a-zA-Z-_][0-9a-zA-Z-_]{5,11}$/;
 var focus_arr = ['user', 'pass', 're-pass', 'phone', 'email'];
 // User Update Image info
-var imgType = '', image = '';
+var imgType = '.jpg', image = '';
+var headDefault = 1;
 
 let regist = new Vue({
     el: '#info-area',
@@ -18,18 +19,11 @@ let regist = new Vue({
         email: '',
         apiUrl: '/logup'
     },
-    headers: {
-        'Content-Type': 'application/octet-stream'
-    },
     mounted: function(){
         this.$nextTick(function(){
             $("[data-toggle='tooltip']").tooltip();
             set_focus();
             Bind_alert();
-            // Initial Head Img
-            imgType = '.jpg';
-            image = new Image();
-            image.src = 'img/user.jpg';
             // Head Img Update
             $('#head').click(function(){
                 $('#updater').trigger('click');
@@ -41,8 +35,10 @@ let regist = new Vue({
                     var filepath = $('#updater').val();
                     imgType = filepath.substring(filepath.lastIndexOf('.'), filepath.length).toLowerCase();
                     if(isImage(imgType)){
-                        $("#head").attr('src', window.URL.createObjectURL(fileObj.files[0]));
-                        image = new Buffer(fileObj.files[0]);
+                        var file = $("#updater")[0].files[0];
+                        $("#head").attr('src', window.URL.createObjectURL(file));
+                        image = file;
+                        headDefault = 0;
                     }else{
                         myAlert('Fatal Error', '<br>Please update correct image file!');
                     }
@@ -68,9 +64,13 @@ let regist = new Vue({
             var sendParams = {name: this.username, pass: this.password, imgType: imgType, 
                               rePass: this.re_password, phone: this.phone, email: this.email, image: image};
             var extraUrl = '?name=' + this.username + '&pass=' + this.password + '&rePass=' + this.re_password 
-                            + '&phone=' + this.phone + '&email=' + this.email + '&imgType=' + this.imgType;
-            console.log(sendParams);
-            this.$http.post(this.apiUrl + extraUrl, sendParams).then(function(response){
+                            + '&phone=' + this.phone + '&email=' + this.email + '&imgType=' + imgType + '&default='+ headDefault;
+            this.$http.post(this.apiUrl + extraUrl, image, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/octet-stream'
+                },
+            }).then(function(response){
                 console.log(response.body.code);
                 if(response.body.code === 1){
                     window.location.href = '/index';
