@@ -106,7 +106,12 @@ router.post('/allPostID', async(ctx, next) => {
 });
 
 router.post('/getUserInfo', async(ctx, next) => {
-    var username = ctx.session.user;
+    var otherInfoFlag = ctx.request.body.flag, username;
+    if(otherInfoFlag !== undefined){
+        username = ctx.request.body.name;
+    }else {
+        username = ctx.session.user;
+    }
     var infoBack = await control.GetInfo(username);
     ctx.response.body = infoBack;
 });
@@ -131,12 +136,64 @@ router.post('/logout', async(ctx, next) => {
     ctx.response.body = {};
 });
 
+router.post('/upload', async (ctx, next)=>{
+    var body = ctx.request.query;
+    var username = ctx.session.user, password = ctx.session.pass,
+        title = body.title, content = body.content,imageType = body.imageType, 
+        mediaType = body.mediaType;
+    var imageStream = null, mediaStream = null;
+    if(imageType !== ''){
+        imageStream = await rawBody(ctx.req);
+    }else if(mediaType !== ''){
+        mediaStream = await rawBody(ctx.req);
+    }
+    var dataRes = await control.Upload(username, password, title, content, 
+                                    imageStream, imageType, mediaStream, mediaType); // [StateCode, errMessage]
+    var jsonBack = {
+        'id' : dataRes['id'],
+        'code' : dataRes['code'],
+        'errMessgae' : dataRes['errMessage']
+    };
+    ctx.response.body = JSON.stringify(jsonBack);
+});
+
+router.post('/checkThumb', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var username = body.name, postID = body.id;
+    var dataRes = await control.checkThumbOrNot(username, postID);
+    var jsonBack = {
+        'haveThumb' : dataRes
+    };
+    ctx.response.body = JSON.stringify(jsonBack);
+});
+
+router.post('/thumbUp', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var thumbUser = ctx.session.name, pass = ctx.session.pass, postID = body.postID;
+    var dataRes = await control.GiveThumbUp(thumbUser, pass, postID);
+    ctx.response.body = JSON.stringify(dataRes);
+});
+
+router.post('/thumbDown', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var thumbUser = ctx.session.name, pass = ctx.session.pass, postID = body.postID;
+    var dataRes = await control.DeleteThumbUp(thumbUser, pass, postID);
+    ctx.response.body = JSON.stringify(dataRes);
+});
+
+router.post('/commentUp', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var thumbUser = body.name, pass = body.pass,
+         postID = body.postID, content = body.content;
+    var dataRes = await control.LeaveComment(thumbUser, pass, postID, content);
+    ctx.response.body = JSON.stringify(dataRes);
+});
+
 /*
 * GET Methods
 */
 router.get('/', async(ctx, next) => {
     var session = ctx.session;
-    console.log('/ ' + session.user);
     if(session.user === undefined){
         await ctx.render('login');
     }else {
@@ -145,7 +202,6 @@ router.get('/', async(ctx, next) => {
 });
 router.get('/index', async(ctx, next) => {
     var session = ctx.session;
-    console.log('/index' + ctx.session.user);
     if(session.user === undefined){
         await ctx.redirect('/');
     }else {
@@ -154,11 +210,46 @@ router.get('/index', async(ctx, next) => {
 });
 router.get('/signin', async(ctx, next) => {await ctx.render('login');});
 router.get('/signup', async(ctx, next) => {await ctx.render('logup');});
-router.get('/user', async(ctx, next) => {await ctx.render('user');});
-router.get('/publish', async(ctx, next) => {await ctx.render('publish');});
-router.get('/friends', async(ctx, next) => {await ctx.render('friends');});
-router.get('/search', async(ctx, next) => {await ctx.render('search');});
-router.get('/details', async(ctx, next) => {await ctx.render('details');});
+router.get('/user', async(ctx, next) => {
+    var session = ctx.session;
+    if(session.user === undefined){
+        await ctx.redirect('/');
+    }else {
+        await ctx.render('user');
+    }
+});
+router.get('/publish', async(ctx, next) => {
+    await ctx.render('publish');var session = ctx.session;
+    if(session.user === undefined){
+        await ctx.redirect('/');
+    }else {
+        await ctx.render('publish');
+    }
+});
+router.get('/friends', async(ctx, next) => {
+    var session = ctx.session;
+    if(session.user === undefined){
+        await ctx.redirect('/');
+    }else {
+        await ctx.render('friends');
+    }
+});
+router.get('/search', async(ctx, next) => {
+    var session = ctx.session;
+    if(session.user === undefined){
+        await ctx.redirect('/');
+    }else {
+        await ctx.render('search');
+    }
+});
+router.get('/details', async(ctx, next) => {
+    var session = ctx.session;
+    if(session.user === undefined){
+        await ctx.redirect('/');
+    }else {
+        await ctx.render('details');
+    }
+});
 
 app.use(router.routes());
 
