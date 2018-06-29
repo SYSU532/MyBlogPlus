@@ -47,7 +47,6 @@ router.post('/login', async(ctx, next) => {
     if (loginRes.code === 1) {
         ctx.session = {user: username, pass: password};
     }
-    console.log(ctx.session);
     ctx.response.body = JSON.stringify(loginRes);
 });
 
@@ -119,7 +118,6 @@ router.post('/getUserInfo', async(ctx, next) => {
 router.post('/modifyUserInfo', async(ctx, next) => {
     var username = ctx.session.user, password = ctx.session.pass;
     var body = ctx.request.query;
-    console.log(body);
     var newEmail = body.newEmail, newPhone = body.newPhone, imgType = body.imgType;
     var newImage = '';
     if(imgType !== ''){
@@ -132,7 +130,6 @@ router.post('/modifyUserInfo', async(ctx, next) => {
 
 router.post('/logout', async(ctx, next) => {
     ctx.session = {};
-    console.log(ctx.session);
     ctx.response.body = {};
 });
 
@@ -222,7 +219,6 @@ router.post('/haveFriendRequest', async(ctx, next)=>{
     var user1 = body.requestUser, user2 = body.responseUser;
     var checkRes = await control.HaveEmail(user1, user2);
     ctx.response.body = JSON.stringify(checkRes);
-    console.log(checkRes);
 });
 
 router.post('/myFriendRequest', async(ctx, next)=>{
@@ -287,10 +283,16 @@ router.get('/search', async(ctx, next) => {
 });
 router.get('/details', async(ctx, next) => {
     var session = ctx.session;
+    var id = ctx.request.query.id;
+    var availID = await control.checkAvailID(id);
+    console.log(availID);
     if(session.user === undefined){
         await ctx.redirect('/');
     }else {
-        await ctx.render('details');
+        if(availID)
+            await ctx.render('details');
+        else
+            await ctx.redirect('/index');
     }
 });
 

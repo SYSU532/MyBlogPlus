@@ -310,3 +310,11 @@ exports.GetTalks = async function(userSend, userGet){
 exports.InsertTalk = async function(userSend, userGet, content){
     model.InsertTalk(userSend, userGet, content);
 }
+
+exports.checkAvailID = async function(id){
+    var allID = await model.GetPostsIDs();
+    if(allID.indexOf(parseInt(id)) === -1)
+        return false;
+    else 
+        return true;
+}
