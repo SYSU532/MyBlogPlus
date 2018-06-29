@@ -63,13 +63,16 @@ block body
                               ul.dropdown-menu.animated.fadeInRight.friend-item(data-toggle="true")
                                 li
                                   a.f-request(v-on:click="checkFriendInfo(item.username)") Check {{ item.username }}'s Profiles
+                                li.divider
+                                li
+                                  a.f-request(v-on:click="chatWithFriend(item.username)") Chat With {{ item.username }}
                         .friends-right(style='background-color: #F3F3F4;')
                           div#hide-evil
                           .friends-title(style='width:100%;margin-left:0;')
                             span.friends-name Chat Room
                           div
                             div.talk-friend
-                              span#talking-friend.friends-words Follower 1
+                              span#talking-friend.friends-words
                             div.chat-panel
                             div.send-panel
                               .lead.emoji-picker-container

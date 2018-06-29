@@ -110,6 +110,7 @@ function AddRequest(userName){
         }else {
             vueSearch.$http.post('/areFriends', {user1: myName, user2: resultName}).then(function(response){
                 if(response.body.code === 1){
+                    console.log('fuck');
                     myAlert('Sorry', '<br> ' + resultName + ' is already one of your friends!');
                 }else {
                     vueSearch.$http.post('/haveFriendRequest', {requestUser: myName, responseUser: resultName}).then(function(response){
