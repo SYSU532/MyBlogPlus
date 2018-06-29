@@ -430,14 +430,18 @@
 	font-family: "Times New Roman",Georgia,Serif;
 	font-style: italic;
 	padding: 60px;
-	width: 500px;
+	width: 100%;
 }
 
 .details-right{
 	float: left;
-	padding: 40px;
+	padding: 0 40px;
 	width: 800px;
 	margin-left: 23px;
+}
+
+.img{
+	padding-bottom: 20px;
 }
 
 .details-bottom{
@@ -447,21 +451,19 @@
 
 .details-img{
 	height: 320px;
-	width: 650px;
+	width: auto;
 }
 
 .details-head{
 	font-size: 30px;
 	font-family: "Times New Roman",Georgia,Serif;
 	font-style: italic;
-	padding: 60px;
+	padding: 0 0 60px;
 }
 
 .details-content{
 	font-size: 20px;
 	font-family: "Times New Roman",Georgia,Serif;
-	padding-left: 60px;
-	padding-top: 20px;
 	padding-bottom: 50px;
 }
 
@@ -469,7 +471,6 @@
 	padding-top: 50px;
 	width: 100%;
 	height: 100px;
-	margin-left: 4%;
 }
 
 .details-input{
@@ -480,9 +481,8 @@
 }
 
 .send-box{
-	padding-left:60px;
 	float:left;
-	margin-top: -10px;
+	margin-top: 10px;
 }
 
 .comments-block{
@@ -490,7 +490,7 @@
 	width: 90%;
 	background-color: #ECECEC;
 	border-radius: 30px;
-	margin-left: 50px;
+	margin: 20px;
 	transition: all 1s;
 }
 
