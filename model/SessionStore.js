@@ -1,5 +1,6 @@
-const session = require('koa-session-minimal')
-const MysqlSession = require('koa-mysql-session')
+const session = require('koa-session-minimal');
+const MysqlSession = require('koa-mysql-session');
+const DBUser = require('./ConnectionInfo');
 // class dbStore extends Store {
 //     constructor() {
 //         super();
@@ -19,9 +20,4 @@ const MysqlSession = require('koa-mysql-session')
 //     }
 // }
 
-exports.store = new MysqlSession({
-    user: 'root',
-    password: '123456',
-    database: 'knowit',
-    host: 'localhost',
-});
+exports.store = new MysqlSession(DBUser.user);

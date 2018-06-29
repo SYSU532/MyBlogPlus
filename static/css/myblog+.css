@@ -316,6 +316,7 @@
 	border: none;
 	outline: none;
 	font-size: 16px;
+    word-break: break-all;
 }
 
 .friend-item{
