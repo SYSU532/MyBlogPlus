@@ -5,13 +5,9 @@
 const mysql = require('mysql');
 const fs = require('fs');
 const crypto = require('crypto');
+const DBuser = require('./ConnectionInfo')
 
-const connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '123456',
-    database : 'knowit'
-});
+const connection = mysql.createConnection(DBuser.user);
 
 connection.connect();
 

@@ -50,19 +50,21 @@ block body
                     .ibox-title
                       h5 Publish Blog
                       span.label.label-primary MyBlog+
-                    .ibox-content
+                    .ibox-content(id='publish-form')
                       span.publish-row
                         span.publish-words Blog Title: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        input#title.profile-input
+                        input#title.profile-input(v-model="title")
                       span.publish-row
                         span.publish-words Blog Media: &nbsp;&nbsp;&nbsp;&nbsp;
-                        img.publish-img.img-circle(alt='image', src='img/add.jpg')
+                        img.publish-img.img-circle(alt='image', src='img/add.jpg', id='picker')
                         input(id='updater', type='file', style='display:none;')
+                        p(id='fileName') {{ filePath }}
+                        video(id='video-preview', controls='controls')
                       span.publish-row
                         div.publish-words.publish-div Blog Content: &nbsp;&nbsp;
-                        textarea#content.publish-textarea
+                        textarea#content.publish-textarea(v-model="content")
                       span.profile-row(style='margin-left: 40%;margin-top:40px;')
-                        input#commit.profile-btn(type='button', value='Commit')
-                        input#cancel.profile-btn(type='button', value='Cancel')
+                        input#commit.profile-btn(type='button', value='Commit', v-on:click="submit")
+                        input#cancel.profile-btn(type='button', value='Cancel', v-on:click="clear")
 
       script(src='js/publish.js')
