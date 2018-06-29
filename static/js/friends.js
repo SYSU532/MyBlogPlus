@@ -14,6 +14,7 @@ $(document).ready(function(){
       window.emojiPicker.discover();
       $('.friends-row').click(onFriendItemClick);
       $('.f-profiles').click(onViewFriendProfiles);
+      initInfo();
 });
 
 function onFriendItemClick(){
@@ -24,4 +25,10 @@ function onFriendItemClick(){
 function onViewFriendProfiles(){
     var f_profile = 'Username: Follower 1<br>Phone: 110<br>Email: 101@ww.ss<br>';
     myAlert('Friend Profile', f_profile, function(){});
+}
+
+function initInfo(){
+    $("#user-img").attr("src", 'img/' + window['localStorage'].imageUrl);
+    $("#user-img").css("opacity", "1");
+    $("#user-name").html('<strong class="font-bold">' + window['localStorage'].username + '</strong>');
 }

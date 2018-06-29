@@ -5,6 +5,7 @@ $(document).ready(function(){
     $('#search-friend-btn').click(onSearch)
     $('#search').focus(focusSearch);
     $('#search').blur(blurSearch);
+    initInfo();
 });
 
 function focusSearch(){
@@ -50,4 +51,10 @@ function AddRequest(){
             // Yes or Not
         })
     });
+}
+
+function initInfo(){
+    $("#user-img").attr("src", 'img/' + window['localStorage'].imageUrl);
+    $("#user-img").css("opacity", "1");
+    $("#user-name").html('<strong class="font-bold">' + window['localStorage'].username + '</strong>');
 }

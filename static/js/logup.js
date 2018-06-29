@@ -73,8 +73,9 @@ let regist = new Vue({
             }).then(function(response){
                 console.log(response.body.code);
                 if(response.body.code === 1){
-                    window.location.href = '/index';
-                    // Store session
+                    setTimeout(function(){
+                        window.location.href = '/index';
+                    }, 100);
                 }else if(response.body.code === 0) {
                     var duplicateResult = response.body.errMessage.split('! ');
                     if(duplicateResult.length > 1){

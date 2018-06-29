@@ -3,6 +3,7 @@ html
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv="Cache-Control", content="no-cache, must-revalidate")
     block title
     link(href="img/icon1.png", rel="icon", type="image/png")
     link(href='css/bootstrap.min.css', rel='stylesheet')
@@ -39,7 +40,7 @@ html
                 a.dropdown-toggle(data-toggle='dropdown', href=' ')
                   span.clear
                     span#user-name.block.m-t-xs
-                      strong.font-bold Palette Chen
+                      strong.font-bold &nbsp;
                     span.text-muted.text-xs.block
                       | Blog User
                       b.caret
@@ -52,7 +53,7 @@ html
                     a Mailbox
                   li.divider
                   li
-                    a(href='login') Logout
+                    a.logout(href='') Logout
               .logo-element
                 | Blog+
             li#home-btn.base-btn

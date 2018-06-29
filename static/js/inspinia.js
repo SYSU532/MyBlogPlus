@@ -4,7 +4,7 @@
  *   version 2.4
  *
  */
-
+Vue.use(VueResource);
 
 $(document).ready(function () {
 
@@ -240,9 +240,19 @@ $(document).ready(function () {
             $(".footer").addClass('fixed');
         }
     }
-
+    $(".logout").click(signout);
     $("#hide-evil").css('width', $(window).width()*0.62);
 });
+
+let vueOut = new Vue({
+    el: '.logout'
+});
+
+function signout(){
+    vueOut.$http.post('/logout').then(function(response){
+        window.location.href = '/';
+    });
+}
 
 // check if browser support HTML5 local storage
 function localStorageSupport() {

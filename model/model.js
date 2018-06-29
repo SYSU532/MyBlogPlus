@@ -43,10 +43,6 @@ var insertComment = 'INSERT INTO comments(id, comUser, message) VALUES(?,?,?)';
 var insertTalk = 'INSERT INTO talks(user, content) VALUES(?,?)';
 var allTalk = 'SELECT * FROM talks';
 
-//6. Sessions
-let querySession = 'SELECT * FROM session WHERE sessionID = ?';
-let removeSession = 'DELETE FROM session WHERE sessionID = ?';
-let setSessionUser = 'INSERT INTO session(sessionID, sessionJSON) VALUES(?,?)';
 
 exports.InsertUser = function(username, pass, userImageUrl, phone, email){
     /*
@@ -277,40 +273,9 @@ exports.checkThumbOrNot = async function(username, id){
     });
 }
 
-exports.addSession = async function(sessID, info) {
-    return new Promise((resolve, reject) => {
-        var param = [sessID, info];
-        connection.query(setSessionUser, param, function(err, result) {
-            console.log(this.sql);
-            if (err) throw err;
-        });
-    });
-}
-
-exports.dropSession = async function(sessID) {
-    return new Promise((resolve, reject) => {
-        connection.query(removeSession, [sessID], function(err, result) {
-            console.log(this.sql);
-            if (err) throw err;
-        });
-    });
-}
-
-exports.getSessionInfo = async function(sessID) {
-    return new Promise((resolve, reject) => {
-        connection.query(querySession, [sessID], function(err, result) {
-            console.log(this.sql);
-            if (err) throw err;
-            console.log(result[0]);
-            if (!result[0]) resolve(null);
-            resolve(result[0].sessJSON);
-        });
-    });
-}
-
 var changeUserImg = function(newUserImage, userImageUrl){
     var buff = new Buffer(newUserImage, 'ascii');
-    var trueImageUrl = 'img/' + userImageUrl;
+    var trueImageUrl = 'static/img/' + userImageUrl;
     fs.writeFileSync(trueImageUrl, buff, function(err){
         if(err) throw err;
     });
