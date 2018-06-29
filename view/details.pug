@@ -69,8 +69,8 @@ block body
                         .details-content
                           p(style='word-break: break-all;') {{ content }}
                         span.details-head Comments
-                        .comments-block(v-for='comment of comments')
-                          .comments-item
+                        .comments-block
+                          .comments-item(v-for='comment of comments')
                             img.img-circle(alt="img", v-bind:src='comment.userThumbnailURL', style='height:60px;width:60px;')
                             span.details-words {{ comment.poster }} : &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content }}
                         .comment-send

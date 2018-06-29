@@ -12,25 +12,9 @@ $(document).ready(function(){
 	// It can be called as many times as necessary; previously converted input fields will not be converted again
 	window.emojiPicker.discover();
 	var commit = $("#send-commit");
-	commit.click(onCommentUp);
 	initInfo();
 	postVue.initPost();
 });
-
-function onCommentUp(){
-	var text = $("#send-comment").val();
-	var target = $(".comments-block");
-	if(text == ''){
-		myAlert('Fatal Warning', '<br>Cannot update empty comment!!');
-	}else{
-		var div1 = '<div class="comments-item" style="display:none;"><img class="img-circle" alt="img" src="img/follower.jpg" style="height:60px;width:60px;"></img>';
-		var div2 = '<span class="details-words">Follower 1 : &nbsp;&nbsp;&nbsp;&nbsp;' + text + '</span></div>';
-		var newChild = div1 + div2;
-		target.append(newChild);
-		var lastChild = $(".comments-block").children().eq(-1);
-		lastChild.fadeIn();
-	}
-}
 
 let vueUserInfo = new Vue({
     el: 'body'
@@ -144,13 +128,31 @@ let postVue = new Vue({
             })
         },
 		sendComment: function () {
+			if (this.commentEditor.length === 0) {
+				return;
+			}
 			this.$http.post(postCommentAPI, {postID: this.postID, content: this.commentEditor}).then(function (response) {
 				if (response.body.code === 0) {
 					myAlert("Comment Posting Error", response.body.errMessage);
 					return;
 				}
 				else if (response.body.code === 1) {
-					postVue.$http.post(userInfoAPI)
+					postVue.$http.post(userInfoAPI).then(function (response) {
+                        if (response.body.code === 0) {
+                            myAlert("Error Retrieving User Info", response.body.errMessage);
+                            return;
+                        }
+                        else if (response.body.code === 1) {
+                        	let newComment = {
+                        		poster: response.body.username,
+								content: postVue.commentEditor,
+								userThumbnailURL: staticPath + response.body.imageUrl
+							};
+                        	postVue.comments.push(newComment);
+                        	$("#send-comment").val("");
+							postVue.commentEditor = "";
+						}
+                    })
 				}
             })
         }
