@@ -44,6 +44,13 @@ let vueFriends = new Vue({
     }
 });
 
+let vueChatList = new Vue({
+    el: '#chatList',
+    data: {
+        items: []
+    }
+});
+
 function initFriends(){
     vueFriends.$http.post('/selectFriends', {name: $("#user-name").children("strong").html()}).then(function(response){
         var friends = response.body.friends;
