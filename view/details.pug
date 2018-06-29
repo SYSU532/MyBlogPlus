@@ -78,7 +78,7 @@ block body
                         .comments-block
                           .comments-item(v-for='comment of comments')
                             img.img-circle(alt="img", v-bind:src='comment.userThumbnailURL', style='height:60px;width:60px;')
-                            span.details-words {{ comment.poster }} : &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content }}
+                            span.details-words(style='word-break: break-all;') {{ comment.poster }} : &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content }}
                         .comment-send
                           .lead.emoji-picker-container(style='float:left;')
                             input#send-comment.details-input(data-emojiable="true", type="text", v-model='commentEditor')

@@ -131,6 +131,10 @@ let postVue = new Vue({
 			if (this.commentEditor.length === 0) {
 				return;
 			}
+			if (this.commentEditor.length > 200) {
+				myAlert("Erroe", "Comment length shall not exceed 200 character.");
+				return;
+			}
 			this.$http.post(postCommentAPI, {postID: this.postID, content: this.commentEditor}).then(function (response) {
 				if (response.body.code === 0) {
 					myAlert("Comment Posting Error", response.body.errMessage);
