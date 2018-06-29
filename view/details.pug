@@ -19,21 +19,14 @@ block body
               li.dropdown
                 a.dropdown-toggle.count-info(data-toggle='dropdown', href='', aria-expanded='false')
                   i.fa.fa-envelope
-                  span.label.label-warning 1
-                ul.dropdown-menu.dropdown-messages
-                  li
+                  span#number.label.label-warning {{ number }}
+                ul#mails-menu.dropdown-menu.dropdown-messages
+                  li(v-for="item of m_items", v-on:click="onClickMail(item.username)", style="cursor:pointer;")
                     .dropdown-messages-box
                       a.pull-left
-                        img.img-circle(alt='image', src='img/follower.jpg')
+                        img.img-circle(alt='image', v-bind:src='item.imageUrl')
                       .media-body
-                        strong Testing....
-                        small.text-muted 2018/06/13
-                  li.divider
-                  li
-                    .text-center.link-block
-                      a
-                        i.fa.fa-envelope
-                        strong Read All Messages
+                        strong {{ item.username }} wants to become friends with you !
               li
                 a(href='signin')
                   i.fa.fa-sign-out
@@ -92,4 +85,5 @@ block body
       script(src='js/util.js')
       script(src='js/jquery.emojiarea.js')
       script(src='js/emoji-picker.js')
+      script(src='js/base.js')
 
