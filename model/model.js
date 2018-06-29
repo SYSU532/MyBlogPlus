@@ -46,6 +46,11 @@ var selectEmail = 'SELECT * FROM emails WHERE userOne = ? AND userTwo = ?';
 var myEmail = 'SELECT * FROM emails WHERE userTwo = ?';
 var dealEmail = 'DELETE FROM emails WHERE userOne = ? AND userTwo = ?';
 
+// 7. Talks
+var insertTalk = 'INSERT INTO talks(userSend, userGet, content) VALUES(?,?,?)';
+var mySendTalk = 'SELECT * FROM talks WHERE userSend = ? and userGet = ?';
+var myGetTalk = 'SELECT * FROM talks WHERE userGet = ? and userSend = ?';
+
 
 exports.InsertUser = function(username, pass, userImageUrl, phone, email){
     /*
@@ -340,24 +345,31 @@ exports.GetPostsIDs = async function(){
     })
 }
 
-exports.GetAllTalks = async function(){
-    return new Promise((resolve, reject)=>{
-        var res = {};
-        connection.query(allTalk, function(err, result){
-            if(err){
-                reject(err);
-            }
-            result.forEach(function(item){
-                res[item.user] = res[item.content];
-            });
-            resolve(res);
-        });
-    });
+exports.InsertTalk = function(userSend, userGet, content){
+    connection.query(insertTalk, [userSend, userGet, content], function(err, result){
+        if(err) throw err;
+    })
 }
 
-exports.SendTalk = function(user, content){
-    connection.query(insertTalk, [user, content], function(err, result){
-        if(err) throw err;
+exports.MyTalks = async function(userSend, userGet){
+    return new Promise((resolve, reject)=>{
+        var res = {
+            'send': [],
+            'get': []
+        };
+        connection.query(mySendTalk, [userSend, userGet], function(err, result){
+            if(err) throw err;
+            result.forEach(function(item){
+                res.send.push(item.content);
+            });
+        });
+        connection.query(myGetTalk, [userSend, userGet], function(err, result){
+            if(err) throw err;
+            result.forEach(function(item){
+                res.get.push(item.content);
+            });
+        });
+        resolve(res);
     });
 }
 

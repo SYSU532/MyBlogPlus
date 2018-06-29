@@ -302,32 +302,11 @@ exports.MyEmail = async function(username){
     return res;
 }
 
-exports.GetTalks = async function(username, password){
-    var test = await model.TestLogIn(username, password);
-    var res = {};
-    if(test === 1){
-        res = await model.GetAllTalks();
-        res['code'] = 1;
-    }else {
-        res = {
-            'code' : 0,
-            'errMessage' : 'Invalid User or Password!'
-        }
-    }
+exports.GetTalks = async function(userSend, userGet){
+    var res = await model.MyTalks(userSend, userGet);
     return res;
 }
 
-exports.SendTalk = async function(username, password, content){
-    var test = await model.TestLogIn(username, password);
-    var res = {
-        'code' : 0,
-        'errMessage' : ''
-    }
-    if(test === 1){
-        res['code'] = 1;
-        model.SendTalk(username, content);
-    }else {
-        res['errMessage'] = 'Invalid User or Password!';
-    }
-    return res;
+exports.InsertTalk = async function(userSend, userGet, content){
+    model.InsertTalk(userSend, userGet, content);
 }
