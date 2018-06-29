@@ -13,6 +13,8 @@ $(document).ready(function(){
 	window.emojiPicker.discover();
 	var commit = $("#send-commit");
 	commit.click(onCommentUp);
+	initInfo();
+	postVue.initPost();
 });
 
 function onCommentUp(){
@@ -29,3 +31,71 @@ function onCommentUp(){
 		lastChild.fadeIn();
 	}
 }
+
+let vueUserInfo = new Vue({
+    el: 'body'
+});
+const getInfoAPI = "/getUserInfo";
+function initInfo(){
+    vueUserInfo.$http.post(getInfoAPI).then(function (response) {
+        if(response.body.code === 1){
+            var body = response.body;
+            $("#user-img").attr("src", 'img/' + body.imageUrl);
+            window['localStorage'].imageUrl = body.imageUrl;
+            window['localStorage'].username = body.username;
+            $("#user-img").css("opacity", "1");
+            $("#user-name").html('<strong class="font-bold">' + body.username + '</strong>');
+        }
+    });
+}
+
+let postAPI = '/data';
+let staticPath = 'img/';
+
+let postVue = new Vue({
+	el: '#Post-Area',
+	data: {
+		title: '',
+		content: '',
+		editor: '',
+		comments: [],
+		isImage: false,
+		isVideo: false,
+		fileUrl: '',
+		postID: 0,
+		thumbs: 0,
+		format: ""
+	},
+	methods: {
+		initPost: function () {
+			this.postID = parseInt(window.location.href.slice(window.location.href.lastIndexOf("=")+1));
+			if (isNaN(this.postID)) {
+				window.location.href = 'index';
+				return;
+			}
+			let getParam = {id: this.postID};
+			this.$http.post(postAPI, getParam).then(function (response) {
+				if (response.body.code === 0) {
+					myAlert("Error", response.body.errMessage);
+					return;
+				}
+				else if (response.body.code === 1) {
+					this.editor = response.body.editor;
+					this.title = response.body.title;
+					this.content = response.body.content;
+					this.comments = response.body.comments;
+					if (response.body.image.length !== 0) {
+						this.isImage = true;
+						this.fileUrl = staticPath + response.body.image;
+					}
+					else if (response.body.media.length !== 0) {
+                        this.isVideo = true;
+                        this.fileUrl = staticPath + response.body.media;
+					}
+					this.thumbs = response.body.thumbs;
+					this.format = this.isVideo ? "Video" : this.isImage ? "Image" : "Article";
+				}
+            })
+        }
+	}
+});

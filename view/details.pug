@@ -46,30 +46,31 @@ block body
             .wrapper.wrapper-content
               .row.row-post
                 .col-lg-4
-                  .ibox.float-e-margins
+                  .ibox.float-e-margins(id='Post-Area')
                     .ibox-title
                       h5 Test
                       span.label.label-primary MyBlog+
                     .ibox-content(style='float:left;')
                       .details-left
                         span.label.details-label 
-                        span Title: Test 
+                        span Title: {{ title }}
                         br
                         br
                         span.label.details-label 
-                        span Editor: Palette Chen
+                        span Editor: {{ editor }}
                         br
                         br
                         span.label.details-label 
-                        span Media-Format: Image
+                        span Media-Format: {{ format }}
                       .details-right
-                        img.details-img(alt='image', src='img/follower.jpg')
+                        img.details-img(alt='image', v-bind:src='fileUrl', v-if='isImage')
+                        video(v-bind:src='fileUrl', v-if='isVideo', controls='controls')
                       .details-bottom
                         span.details-head Content
                         br
                         br
                         .details-content
-                          p First Test Message ~~~~
+                          p {{ content }}
                         span.details-head Comments
                         .comments-block
                           .comments-item
