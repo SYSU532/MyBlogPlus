@@ -259,6 +259,49 @@ exports.AddComments = async function(username, id){
     return result;
 }
 
+exports.SelectFriends = async function(username){
+    var result = await model.SelectFriendsByName(username);
+    var selectRes = {
+        'friends': result
+    };
+    return selectRes;
+}
+
+exports.AreFriends = async function(user1, user2){
+    var result = await model.AreFriends(user1, user2);
+    return result;
+}
+
+exports.InsertEmail = async function(user1, user2){
+    model.InsertEmail(user1, user2);
+}
+
+exports.DealEmail = async function(user1, user2, accept){
+    model.DealEmail(user1, user2, accept);
+}
+
+exports.HaveEmail = async function(user1, user2){
+    /*
+    * checkRes: 1 for no email, 0 for you have send such email, 
+    * -1 for target have send such email 
+    */
+    var res = {};
+    var checkRes = await model.HaveEmail(user1, user2);
+    var res = {
+        'code': checkRes
+    }
+    return res;
+}
+
+exports.MyEmail = async function(username){
+    var res = {
+        'requestUser': []
+    };
+    var checkRes = await model.MyEmail(username);
+    res.requestUser = checkRes;
+    return res;
+}
+
 exports.GetTalks = async function(username, password){
     var test = await model.TestLogIn(username, password);
     var res = {};

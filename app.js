@@ -183,10 +183,53 @@ router.post('/thumbDown', async(ctx, next)=>{
 
 router.post('/commentUp', async(ctx, next)=>{
     var body = ctx.request.body;
-    var thumbUser = body.name, pass = body.pass,
+    var thumbUser = ctx.session.name, pass = ctx.session.pass,
          postID = body.postID, content = body.content;
     var dataRes = await control.LeaveComment(thumbUser, pass, postID, content);
     ctx.response.body = JSON.stringify(dataRes);
+});
+
+router.post('/selectFriends', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var username = body.name;
+    var selectRes = await control.SelectFriends(username);
+    ctx.response.body = JSON.stringify(selectRes);
+});
+
+router.post('/areFriends', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var user1 = body.user1, user2 = body.user2;
+    var checkRes = await control.AreFriends(user1, user2);
+    ctx.response.body = JSON.stringify(checkRes);
+});
+
+router.post('/addFriendRequest', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var user1 = body.requestUser, user2 = body.responseUser;
+    await control.InsertEmail(user1, user2);
+    ctx.response.body = {};
+});
+
+router.post('/dealFriendRequest', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var accept = body.accept, user1 = body.requestUser, user2 = body.responseUser;
+    await control.DealEmail(user1, user2, accept);
+    ctx.response.body = {};
+});
+
+router.post('/haveFriendRequest', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var user1 = body.requestUser, user2 = body.responseUser;
+    var checkRes = await control.HaveEmail(user1, user2);
+    ctx.response.body = JSON.stringify(checkRes);
+    console.log(checkRes);
+});
+
+router.post('/myFriendRequest', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var responseUser = body.name;
+    var myEmails = await control.MyEmail(responseUser);
+    ctx.response.body = JSON.stringify(myEmails);
 });
 
 /*

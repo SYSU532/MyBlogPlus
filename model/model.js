@@ -39,9 +39,15 @@ var deleteThumb = 'DELETE FROM thumbs WHERE id = ? AND thumbUser = ?';
 var selectComment = 'SELECT * FROM comments WHERE id = ?';
 var insertComment = 'INSERT INTO comments(id, comUser, message) VALUES(?,?,?)';
 
-// 5. Talks
-var insertTalk = 'INSERT INTO talks(user, content) VALUES(?,?)';
-var allTalk = 'SELECT * FROM talks';
+// 5. Friends
+var insertFriendShip = 'INSERT INTO friends(userOne, userTwo) VALUES(?,?)';
+var selectFriends = 'SELECT * FROM friends WHERE userOne = ? or userTwo = ?';
+
+// 6. Emails
+var insertEmail = 'INSERT INTO emails(userOne, userTwo) VALUES(?,?)';
+var selectEmail = 'SELECT * FROM emails WHERE userOne = ? AND userTwo = ?';
+var myEmail = 'SELECT * FROM emails WHERE userTwo = ?';
+var dealEmail = 'DELETE FROM emails WHERE userOne = ? AND userTwo = ?';
 
 
 exports.InsertUser = function(username, pass, userImageUrl, phone, email){
@@ -202,6 +208,103 @@ exports.AddComments = async function(username, id){
     })
 }
 
+var InsertFriends = function(user1, user2){
+    connection.query(insertFriendShip, [user1, user2], function(err, result){
+        if(err) throw err;
+    });
+}
+
+exports.SelectFriendsByName = function(username){
+    return new Promise((resolve, reject) => {
+        var res = [];
+        connection.query(selectFriends, [username, username], function(err, result){
+            if(err){
+                reject(err);
+            }
+            result.forEach(function(item){
+                if(item.userOne == username)
+                    res.push(item.userTwo);
+                else
+                    res.push(item.userOne);
+            });
+            resolve(res);
+        });
+    });
+}
+
+exports.AreFriends = async function(user1, user2){
+    return new Promise((resolve, reject) => {
+        var res = {
+            'code': 0
+        };
+        connection.query(selectFriends, [user1, user2], function(err, result){
+            if(err) reject(err);
+            if(Object.keys(result).length > 0){
+                res.code = 1;
+                resolve(res);
+            }else {
+                connection.query(selectFriends, [user2, user1], function(err, result){
+                    if(err) reject(err);
+                    if(Object.keys(result).length > 0)
+                        res.code = 1;
+                    resolve(res);
+                });
+            }
+        });
+    });
+}
+
+exports.InsertEmail = function(user1, user2){
+    connection.query(insertEmail, [user1, user2], function(err, result){
+        if(err) throw err;
+    });
+}
+
+exports.DealEmail = function(user1, user2, accept){
+    if(accept){
+        InsertFriends(user1, user2);
+    }
+    connection.query(dealEmail, [user1, user2], function(err, result){
+        if(err) throw err;
+    });
+    connection.query(dealEmail, [user2, user1], function(err, result){
+        if(err) throw err;
+    });
+}
+
+exports.HaveEmail = async function(user1, user2){
+    return new Promise((resolve, reject)=>{
+        var code = 1;
+        connection.query(selectEmail, [user1, user2], function(err, result){
+            if(err) throw err;
+            if(Object.keys(result).length > 0){
+                code = 0;
+                resolve(code);
+            }
+        });
+        connection.query(selectEmail, [user2, user1], function(err, result){
+            if(err) throw err;
+            if(Object.keys(result).length > 0){
+                code = -1;
+            }
+            resolve(code);
+        });
+    });
+}
+
+exports.MyEmail = async function(username){
+    return new Promise((resolve, reject)=>{
+        var res = [];
+        connection.query(myEmail, [username], function(err, result){
+            if(err) throw err;
+            result.forEach(function(item){
+                res.push(item.userOne);
+            });
+            resolve(res);
+        });
+    });
+}
+
 exports.StoreUserImg = function(userImage, imageUrl){
     var buff = new Buffer(userImage, 'ascii');
     var trueImageUrl = 'static/img/' + imageUrl;
@@ -280,8 +383,6 @@ var changeUserImg = function(newUserImage, userImageUrl){
         if(err) throw err;
     });
 }
-
-
 
 exports.GetEncode_SHA256 = function(str){
     var secret = 'HoShiNoGen', key = secret.toString('hex');

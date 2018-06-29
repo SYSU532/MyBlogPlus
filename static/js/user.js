@@ -17,9 +17,13 @@ $(document).ready(function(){
         if(fileObj && fileObj.files && fileObj.files[0]){
             var filepath = $('#updater').val();
             imgType = filepath.substring(filepath.lastIndexOf('.'), filepath.length).toLowerCase();
-            $(".profile-img").attr('src', window.URL.createObjectURL(fileObj.files[0]));
-            imgChanged = true;
-            image = fileObj.files[0];
+            if(isImage(imgType)){
+                $(".profile-img").attr('src', window.URL.createObjectURL(fileObj.files[0]));
+                imgChanged = true;
+                image = fileObj.files[0];
+            }else {
+                myAlert('Fatal Error', '<br>Please update correct image file!');
+            }
         }
     });
     initInfo();
@@ -34,6 +38,13 @@ let vueUserInfo = new Vue({
 
 function update_img(){
     $('#updater').trigger('click');
+}
+
+function isImage(type){
+    if(type == '.jpg' || type == '.jpeg' || type == '.png' 
+            || type == '.gif' || type == '.ico'){
+        return true;
+    }else return false;
 }
 
 function initInfo(){
