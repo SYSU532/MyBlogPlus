@@ -122,6 +122,10 @@
 #user-name{
 	padding-left: 8%;
 }
+
+#video-preview{
+	margin-left: -80px;
+}
 /*
 * User Profile Page Part 
 */

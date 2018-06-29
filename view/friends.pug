@@ -55,13 +55,14 @@ block body
                         .friends-left
                           .friends-title
                             span.friends-name Friends List
-                          .friends-row
-                            img.friends-img.img-circle(alt='image', src='img/follower.jpg')
-                            span.friends-name Follower 1
-                            a.dropdown-toggle(data-toggle="true")
-                            ul.dropdown-menu.animated.fadeInRight.friend-item(data-toggle="true")
-                              li
-                                a.f-profiles Check Friend's Profiles
+                          #friends-list
+                            .friends-row(v-for="item of items", v-on:click="checkFriendInfo(item.username)")
+                              img.friends-img.img-circle(alt='image', v-bind:src="item.imageUrl")
+                              span.friends-name {{ item.username }}
+                              a.dropdown-toggle(data-toggle="dropdown")
+                              ul.dropdown-menu.animated.fadeInRight.friend-item(data-toggle="true")
+                                li
+                                  a.f-request Check {{ item.username }}'s Profiles
                         .friends-right(style='background-color: #F3F3F4;')
                           div#hide-evil
                           .friends-title(style='width:100%;margin-left:0;')

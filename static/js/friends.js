@@ -1,5 +1,7 @@
 //friends.js
 
+Vue.use(VueResource);
+
 $(document).ready(function(){
     $('#friends-btn').css('background-color', 'white');
     // Initializes and creates emoji set from sprite sheet
@@ -12,24 +14,45 @@ $(document).ready(function(){
       // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
       // It can be called as many times as necessary; previously converted input fields will not be converted again
       window.emojiPicker.discover();
-      $('.friends-row').click(onFriendItemClick);
-      $('.f-profiles').click(onViewFriendProfiles);
-      $('#send.profile-btn').click(onSendMessageClick);
       initInfo();
+      initFriends();
+      AddToggle();
 });
+
+let vueFriends = new Vue({
+    el: '#friends-list',
+    data: {
+        items: []
+    },
+    methods: {
+        checkFriendInfo: function (username){
+            vueFriends.$http.post('/getUserInfo', {flag: true, name: username}).then(function(response){
+                var phone = response.body.phone, email = response.body.email;
+                myAlert(username + '\'s Info', 'Username: ' + username + '<br>Phone: ' + phone + '<br>Email: ' + email);
+            });
+        }
+    }
+});
+
+function initFriends(){
+    vueFriends.$http.post('/selectFriends', {name: $("#user-name").children("strong").html()}).then(function(response){
+        var friends = response.body.friends;
+        friends.forEach(function(item){
+            var newItem = {
+                'username': item,
+                'imageUrl': ''
+            };
+            vueFriends.$http.post('/getUserInfo', {flag: true, name: item}).then(function(response){
+                newItem.imageUrl = 'img/' + response.body.imageUrl;
+                vueFriends.items.push(newItem);
+            });
+        });
+    });
+}
 
 function onFriendItemClick(){
     var target = $(this).children(".friend-item");
     target.toggle();
-}
-
-function onViewFriendProfiles(){
-    var f_profile = 'Username: Follower 1<br>Phone: 110<br>Email: 101@ww.ss<br>';
-    myAlert('Friend Profile', f_profile, function(){});
-}
-
-function onSendMessageClick(){
-    //
 }
 
 function initInfo(){

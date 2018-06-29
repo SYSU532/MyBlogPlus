@@ -43,7 +43,7 @@ let publishVue = new Vue({
                 let type = path.slice(path.lastIndexOf('.')).toLowerCase();
                 if(imagePostfix.indexOf(type) !== -1 || videoPostfix.indexOf(type) !== -1){
                     let file = $("#updater")[0].files[0];
-                    if (imagePostfix.indexOf(type) !== -1 )
+                    if (imagePostfix.indexOf(type) !== -1 && file)
                         $("#picker").attr('src', window.URL.createObjectURL(file));
                     else if (videoPostfix.indexOf(type) !== -1) {
                         $('#video-preview').css('display', 'block').attr('src', window.URL.createObjectURL(file));
