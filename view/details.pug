@@ -27,6 +27,12 @@ block body
                         img.img-circle(alt='image', v-bind:src='item.imageUrl')
                       .media-body
                         strong {{ item.username }} wants to become friends with you !
+                  li.divider
+                  li
+                    .text-center.link-block
+                      a(href='search')
+                        i.fa.fa-envelope
+                        strong Read All Messages
               li
                 a(href='signin')
                   i.fa.fa-sign-out
