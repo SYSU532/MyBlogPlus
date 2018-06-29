@@ -45,7 +45,7 @@ block body
             .col-lg-12
                 .wrapper.wrapper-content(id='postList')
                     .row.row-post(v-for='item of items')
-                        .col-lg-4
+                        .col-lg-4(v-show="item.show")
                             .ibox.float-e-margins
                                 .ibox-title
                                     h5 {{ item.title }}
@@ -54,13 +54,15 @@ block body
                                     .ibox-tools
                                         a.collapse-link
                                             i.fa.fa-chevron-up
-                                        a.close-link
+                                        a.close-link(v-on:click="item.show = false")
                                             i.fa.fa-times
-                                .ibox-content.post-item
+                                .ibox-content.post-item(v-on:click='showDetails(item.id)')
                                     div
                                         h4 {{ item.content }}
                                     i.fa.fa-comments.comments
+                                        span {{ item.commentsCount }}
                                     i.fa.fa-thumbs-o-up.thumbs
+                                        span {{ item.thumbs }}
                 .footer
                     .pull-right
                         | Github @ SYSU532

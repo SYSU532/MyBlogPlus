@@ -27,6 +27,11 @@ let vuePostList = new Vue({
    el: '#postList',
    data: {
        items: []
+   },
+   methods: {
+       showDetails: function (id) {
+            window.location.href = `/details?id=${id}`;
+       }
    }
 });
 
@@ -67,6 +72,9 @@ function initList() {
                     newPost.editor = response.body.editor;
                     newPost.content = response.body.content;
                     newPost.thumbs = response.body.thumbs;
+                    newPost.commentsCount = Object.keys(response.body.comments).length;
+                    newPost.id = id;
+                    newPost.show = true;
                     vuePostList.items.push(newPost);
                 }
             })
