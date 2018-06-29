@@ -49,8 +49,11 @@ function initInfo(){
     });
 }
 
-let postAPI = '/data';
-let staticPath = 'img/';
+const postAPI = '/data';
+const checkThumbAPI = '/checkThumb';
+const thumbUpAPI = '/thumbUp';
+const thumbDowmAPI = '/thumbDown';
+const staticPath = 'img/';
 
 let postVue = new Vue({
 	el: '#Post-Area',
@@ -94,6 +97,30 @@ let postVue = new Vue({
 					}
 					this.thumbs = response.body.thumbs;
 					this.format = this.isVideo ? "Video" : this.isImage ? "Image" : "Article";
+				}
+            })
+        },
+        giveThumb: function () {
+			this.$http.post(checkThumbAPI, {id: this.postID}).then(function (response) {
+				if (response.body.haveThumb === 1) {
+					postVue.$http.post(thumbDowmAPI, {postID: postVue.postID}).then(function (response) {
+						if (response.body.code === 1) {
+							postVue.thumbs -= 1;
+						}
+						else {
+							myAlert("Error", response.body.errMessage);
+						}
+                    });
+				}
+				else if (response.body.haveThumb === 0) {
+                    postVue.$http.post(thumbUpAPI, {postID: postVue.postID}).then(function (response) {
+                        if (response.body.code === 1) {
+                            postVue.thumbs += 1;
+                        }
+                        else {
+                            myAlert("Error", response.body.errMessage);
+                        }
+                    });
 				}
             })
         }

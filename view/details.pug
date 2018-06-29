@@ -48,8 +48,10 @@ block body
                 .col-lg-4
                   .ibox.float-e-margins(id='Post-Area')
                     .ibox-title
-                      h5 Test
+                      h5 {{ title }}
                       span.label.label-primary MyBlog+
+                      i.fa.fa-thumbs-o-up.thumbs(v-on:click='giveThumb')
+                        span {{ thumbs }}
                     .ibox-content(style='float:left;')
                       .details-left
                         span.label.details-label 
@@ -64,15 +66,16 @@ block body
                         span Media-Format: {{ format }}
                       .details-right
                         img.details-img(alt='image', v-bind:src='fileUrl', v-if='isImage')
-                        video(v-bind:src='fileUrl', v-if='isVideo', controls='controls')
-                      .details-bottom
+                        video(id='postVid',v-if='isVideo', controls, preload="auto")
+                          source(v-bind:src='fileUrl')
+                          .details-bottom
                         span.details-head Content
                         br
                         br
                         .details-content
-                          p {{ content }}
+                          p(style='word-break: break-all;') {{ content }}
                         span.details-head Comments
-                        .comments-block
+                        .comments-block(v-for='comment of comments')
                           .comments-item
                             img.img-circle(alt="img", src="img/follower.jpg", style='height:60px;width:60px;')
                             span.details-words Follower 1 : &nbsp;&nbsp;&nbsp;&nbsp;Great Picture!
@@ -83,10 +86,9 @@ block body
                             input#send-commit.profile-btn(type='button', value='Send')
                         
 
-                      
-
       script(src='js/details.js')
       script(src='js/config.js')
       script(src='js/util.js')
       script(src='js/jquery.emojiarea.js')
       script(src='js/emoji-picker.js')
+
