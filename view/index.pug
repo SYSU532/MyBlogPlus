@@ -58,7 +58,7 @@ block body
                                             i.fa.fa-times
                                 .ibox-content.post-item(v-on:click='showDetails(item.id)')
                                     div
-                                        h4 {{ item.content }}
+                                        h4(style='word-break: break-all;') {{ item.content }}
                                     i.fa.fa-comments.comments
                                         span {{ item.commentsCount }}
                                     i.fa.fa-thumbs-o-up.thumbs
