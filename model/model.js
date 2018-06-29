@@ -37,7 +37,8 @@ var insertComment = 'INSERT INTO comments(id, comUser, message) VALUES(?,?,?)';
 
 // 5. Friends
 var insertFriendShip = 'INSERT INTO friends(userOne, userTwo) VALUES(?,?)';
-var selectFriends = 'SELECT * FROM friends WHERE userOne = ? or userTwo = ?';
+var selectFriends = 'SELECT * FROM friends WHERE userOne = ? AND userTwo = ?';
+var myFriends = 'SELECT * FROM friends WHERE userOne = ? OR userTwo = ?';
 
 // 6. Emails
 var insertEmail = 'INSERT INTO emails(userOne, userTwo) VALUES(?,?)';
@@ -213,7 +214,7 @@ var InsertFriends = function(user1, user2){
 exports.SelectFriendsByName = function(username){
     return new Promise((resolve, reject) => {
         var res = [];
-        connection.query(selectFriends, [username, username], function(err, result){
+        connection.query(myFriends, [username, username], function(err, result){
             if(err){
                 reject(err);
             }
@@ -241,8 +242,9 @@ exports.AreFriends = async function(user1, user2){
             }else {
                 connection.query(selectFriends, [user2, user1], function(err, result){
                     if(err) reject(err);
-                    if(Object.keys(result).length > 0)
+                    if(Object.keys(result).length > 0){
                         res.code = 1;
+                    }
                     resolve(res);
                 });
             }

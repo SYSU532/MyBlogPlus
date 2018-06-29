@@ -21,17 +21,25 @@ $(document).ready(function(){
 let vueFriends = new Vue({
     el: '#friends-list',
     data: {
-        items: []
+        items: [],
+        clickItem: ''
     },
     methods: {
         checkFriendInfo: function (username){
             vueFriends.$http.post('/getUserInfo', {flag: true, name: username}).then(function(response){
                 var phone = response.body.phone, email = response.body.email;
                 myAlert(username + '\'s Info', 'Username: ' + username + '<br>Phone: ' + phone + '<br>Email: ' + email);
+                $(this.clickItem).toggle();
             });
         },
         AddToggle: function(event){
             AddToggle0(event.target);
+            if(event.target.children[3] !== undefined)
+                this.clickItem = event.target.children[3];
+        },
+        chatWithFriend: function(username){
+            $("#talking-friend").html(username);
+            $(this.clickItem).toggle();
         }
     }
 });
