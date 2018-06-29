@@ -370,7 +370,6 @@ exports.MyTalks = async function(userSend, userGet){
                     res.talks.push(talk);
                 }
             });
-            console.log(res);
             resolve(res);
         });
     });

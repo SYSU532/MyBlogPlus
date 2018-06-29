@@ -281,6 +281,7 @@
 	background-color: #F3F3F4;
 	width: 100%;
 	height: 400px;
+	overflow: auto;
 }
 
 .send-panel{
@@ -512,4 +513,45 @@
 	border-radius: 5px;
 	padding: 3px 4px;
 	font-size: 20px;
+}
+
+/*
+* ChatRoom Bubbles
+*/
+.sendMessage{
+	width: 100%;
+	height: 60px;
+	padding-left: 90%;
+	padding-top: 10px;
+}
+
+.getMessage{
+	width: 100%;
+	height: 60px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.talk-head{
+	height: 60px;
+	width: 60px;
+}
+
+.whiteBox{
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	margin-left: 10px;
+	padding-left: 5px;
+	background-color: white;
+}
+
+.greenBox{
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	margin-left: 10px;
+	padding-left: 5px;
+	background-color: #18a689;
 }

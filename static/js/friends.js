@@ -54,12 +54,13 @@ let vueFriends = new Vue({
                     var messages = response.body.talks;
                     messages.forEach(function(item){
                         var mySend = item.send == 1 ? true : false;
-                        vueChatList.mySend = mySend;
                         var newItem = {
                             'content': item.content,
-                            'imageUrl': mySend ? myImageUrl : friendImageUrl
+                            'imageUrl': mySend ? myImageUrl : friendImageUrl,
+                            'send': mySend
                         }
                         vueChatList.items.push(newItem);
+                        $(".chat-panel").scrollTop = $(".chat-panel").scrollHeight;
                 });
             });
             });
@@ -103,7 +104,6 @@ function initInfo(){
 let vueChatList = new Vue({
     el: '#chat-list',
     data: {
-        mySend : false,
         items: []
     }
 });
@@ -152,13 +152,14 @@ function appendMessage(flag, content){
     var target = $('.chat-panel');
     var newItem = {
         'content': content,
-        'imageUrl': ''
+        'imageUrl': '',
+        'send': flag
     };
     if(flag){
         newItem.imageUrl = myImageUrl;
     }else {
         newItem.imageUrl = friendImageUrl;
     }
+    $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
     vueChatList.items.push(newItem);
-    vueChatList.mySend = flag;
 }
