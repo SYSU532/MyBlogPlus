@@ -3,6 +3,8 @@
 Vue.use(VueResource);
 
 var ws = new WebSocket("ws://localhost:18088");
+var myImageUrl = '', friendImageUrl = '';
+
 $(document).ready(function(){
     $('#friends-btn').css('background-color', 'white');
     // Initializes and creates emoji set from sprite sheet
@@ -16,6 +18,7 @@ $(document).ready(function(){
       // It can be called as many times as necessary; previously converted input fields will not be converted again
       window.emojiPicker.discover();
       initInfo();
+      myImageUrl = 'img/' + window['localStorage'].imageUrl;
       initFriends();
       initChatRoom();
 });
@@ -42,14 +45,25 @@ let vueFriends = new Vue({
         chatWithFriend: function(username){
             $("#talking-friend").html(username);
             $(this.clickItem).toggle();
+            this.$http.post('/getUserInfo', {flag: true, name: username}).then(function(response){
+                friendImageUrl = 'img/' + response.body.imageUrl;
+                // Get Old Talking history
+                var myName = $("#user-name").children("strong").html();
+                var friendName = $("#talking-friend").html();
+                this.$http.post('/allTalks', {userSend: myName, userGet: friendName}).then(function(response){
+                    var messages = response.body.talks;
+                    messages.forEach(function(item){
+                        var mySend = item.send == 1 ? true : false;
+                        vueChatList.mySend = mySend;
+                        var newItem = {
+                            'content': item.content,
+                            'imageUrl': mySend ? myImageUrl : friendImageUrl
+                        }
+                        vueChatList.items.push(newItem);
+                });
+            });
+            });
         }
-    }
-});
-
-let vueChatList = new Vue({
-    el: '#chatList',
-    data: {
-        items: []
     }
 });
 
@@ -86,12 +100,21 @@ function initInfo(){
 }
 
 /*  ----- WebSocket CharRoom Client  -----  */
+let vueChatList = new Vue({
+    el: '#chat-list',
+    data: {
+        mySend : false,
+        items: []
+    }
+});
+
 function initChatRoom(){
     ws.onopen = function(e){
         console.log('WebSocket Server connect success..');
+        var myName = $("#user-name").children("strong").html();
+        ws.send('hello$' + myName);
     };
     ws.onmessage = function(e){
-        console.log(e.data);
         parseMessage(e.data);
     }
     // Bind sending and receiving methods
@@ -126,5 +149,16 @@ function onSendMess(){
 
 function appendMessage(flag, content){
     // flag: 1 for myself-send, 0 for other-send
-
+    var target = $('.chat-panel');
+    var newItem = {
+        'content': content,
+        'imageUrl': ''
+    };
+    if(flag){
+        newItem.imageUrl = myImageUrl;
+    }else {
+        newItem.imageUrl = friendImageUrl;
+    }
+    vueChatList.items.push(newItem);
+    vueChatList.mySend = flag;
 }

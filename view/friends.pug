@@ -72,7 +72,13 @@ block body
                           div
                             div.talk-friend
                               span#talking-friend.friends-words
-                            div.chat-panel
+                            div.chat-panel(id='chat-list')
+                              .chat-row(v-for="item of items", v-bind:class="{sendMessage: mySend, getMessage: !mySend}")
+                                img.img-circle(v-bind:src="item.imageUrl", v-if="!mySend")
+                                div(v-bind:class="{greenBox: mySend, whiteBox: !mySend}")
+                                  span {{ item.content }}
+                                img.img-circle(v-bind:src="item.imageUrl", v-if="mySend")
+
                             div.send-panel
                               .lead.emoji-picker-container
                                 textarea#send-text.friends-textarea(data-emojiable="true")

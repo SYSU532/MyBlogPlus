@@ -319,27 +319,24 @@ var server = ws.createServer(function(conn){
     conn.on('text', async function(str){
         console.log(str);
         var result = str.split('\'$\'');
-        var userSend = result[0], userGet = result[1], content = result[2];
-        // Push Into DB
-        control.InsertTalk(userSend, userGet, content);
-        var nowConn = {
-            'username': userSend,
-            'conn': conn
-        };
-        var hasFlag = false;
-        conn_arr.forEach(function(connMess){
-            if(connMess.username === nowConn.username){
-                hasFlag = true;
-            }
-        });
-        if(!hasFlag){
+        if(result[0] === str){
+            var name = str.split('$')[1];
+            console.log('name ' + name);
+            var nowConn = {
+                'username': name,
+                'conn': conn
+            };
             conn_arr.push(nowConn);
+        }else {
+            var userSend = result[0], userGet = result[1], content = result[2];
+            // Push Into DB
+            control.InsertTalk(userSend, userGet, content);
+            conn_arr.forEach(function(item){
+                console.log(item.username);
+                if(item.username === userSend || item.username === userGet)
+                    item.conn.sendText(str);
+            });
         }
-        var userSendFlag = false, userGetFlag = false;
-        conn_arr.forEach(function(item){
-            if(item.username === userSend || item.username === userGet)
-                item.conn.sendText(str);
-        });
     });
 
     conn.on('close', async function(code, reason){});

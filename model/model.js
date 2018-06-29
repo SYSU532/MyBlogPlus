@@ -48,8 +48,7 @@ var dealEmail = 'DELETE FROM emails WHERE userOne = ? AND userTwo = ?';
 
 // 7. Talks
 var insertTalk = 'INSERT INTO talks(userSend, userGet, content) VALUES(?,?,?)';
-var mySendTalk = 'SELECT * FROM talks WHERE userSend = ? and userGet = ?';
-var myGetTalk = 'SELECT * FROM talks WHERE userGet = ? and userSend = ?';
+var GetTalk = 'SELECT * FROM talks WHERE userSend = ? or userGet = ?';
 
 
 exports.InsertUser = function(username, pass, userImageUrl, phone, email){
@@ -354,22 +353,26 @@ exports.InsertTalk = function(userSend, userGet, content){
 exports.MyTalks = async function(userSend, userGet){
     return new Promise((resolve, reject)=>{
         var res = {
-            'send': [],
-            'get': []
+            'talks': []
         };
-        connection.query(mySendTalk, [userSend, userGet], function(err, result){
+        connection.query(GetTalk, [userSend, userSend], function(err, result){
             if(err) throw err;
             result.forEach(function(item){
-                res.send.push(item.content);
+                var talk = {
+                    'send': 0,
+                    'content': item.content
+                };
+                if(item.userSend === userSend && item.userGet === userGet){
+                    talk.send = 1;
+                    res.talks.push(talk);
+                }else if(item.userGet === userSend && item.userSend === userGet){
+                    talk.send = 0;
+                    res.talks.push(talk);
+                }
             });
+            console.log(res);
+            resolve(res);
         });
-        connection.query(myGetTalk, [userSend, userGet], function(err, result){
-            if(err) throw err;
-            result.forEach(function(item){
-                res.get.push(item.content);
-            });
-        });
-        resolve(res);
     });
 }
 
