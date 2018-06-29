@@ -2,6 +2,7 @@
 
 Vue.use(VueResource);
 
+var ws = new WebSocket("ws://localhost:18088");
 $(document).ready(function(){
     $('#friends-btn').css('background-color', 'white');
     // Initializes and creates emoji set from sprite sheet
@@ -16,6 +17,7 @@ $(document).ready(function(){
       window.emojiPicker.discover();
       initInfo();
       initFriends();
+      initChatRoom();
 });
 
 let vueFriends = new Vue({
@@ -83,3 +85,46 @@ function initInfo(){
     $("#user-name").html('<strong class="font-bold">' + window['localStorage'].username + '</strong>');
 }
 
+/*  ----- WebSocket CharRoom Client  -----  */
+function initChatRoom(){
+    ws.onopen = function(e){
+        console.log('WebSocket Server connect success..');
+    };
+    ws.onmessage = function(e){
+        console.log(e.data);
+        parseMessage(e.data);
+    }
+    // Bind sending and receiving methods
+    $("#send").click(onSendMess);
+}
+
+function parseMessage(mess){
+    var res = mess.split('\'$\'');
+    var userSend = res[0], userGet = res[1], content = res[2];
+    var myName = $("#user-name").children("strong").html();
+    if(myName === userSend){
+        appendMessage(true, content);
+    }else if(myName === userGet){
+        appendMessage(false, content);
+    }
+}
+
+function onSendMess(){
+    var myName = $("#user-name").children("strong").html();
+    var friendName = $("#talking-friend").html();
+    var content = $("#send-text").val();
+    if(friendName === '' || friendName === undefined){
+        myAlert('Fatal Error', '<br>Please pick one friend before talking or sending messages!');
+        return;
+    }else if(content === ''){
+        myAlert('Fatal Error', '<br>Do not send empty message to others!');
+        return;
+    }
+    var mess = myName + '\'$\'' + friendName + '\'$\'' + content;
+    ws.send(mess);
+}
+
+function appendMessage(flag, content){
+    // flag: 1 for myself-send, 0 for other-send
+
+}

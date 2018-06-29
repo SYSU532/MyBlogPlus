@@ -228,6 +228,13 @@ router.post('/myFriendRequest', async(ctx, next)=>{
     ctx.response.body = JSON.stringify(myEmails);
 });
 
+router.post('/allTalks', async(ctx, next)=>{
+    var body = ctx.request.body;
+    var userSend = body.userSend, userGet = body.userGet;
+    var res = await control.GetTalks(userSend, userGet);
+    ctx.response.body = JSON.stringify(res);
+});
+
 /*
 * GET Methods
 */
@@ -299,4 +306,45 @@ router.get('/details', async(ctx, next) => {
 app.use(router.routes());
 
 app.listen(18080);
-console.log('The server running on port 18080....');
+console.log('The Blog Server running on port 18080....');
+
+/* ------  WebSocket ChatRoom Server  ------ */
+var conn_users = {
+    'userSend': '',
+    'userGet': ''
+};
+var conn_arr = [];
+
+var server = ws.createServer(function(conn){
+    conn.on('text', async function(str){
+        console.log(str);
+        var result = str.split('\'$\'');
+        var userSend = result[0], userGet = result[1], content = result[2];
+        // Push Into DB
+        control.InsertTalk(userSend, userGet, content);
+        var nowConn = {
+            'username': userSend,
+            'conn': conn
+        };
+        var hasFlag = false;
+        conn_arr.forEach(function(connMess){
+            if(connMess.username === nowConn.username){
+                hasFlag = true;
+            }
+        });
+        if(!hasFlag){
+            conn_arr.push(nowConn);
+        }
+        var userSendFlag = false, userGetFlag = false;
+        conn_arr.forEach(function(item){
+            if(item.username === userSend || item.username === userGet)
+                item.conn.sendText(str);
+        });
+    });
+
+    conn.on('close', async function(code, reason){});
+
+    conn.on('error', async function(code, reason){});
+}).listen(18088);
+
+console.log('WebSocket Server Running on port 18088....');
