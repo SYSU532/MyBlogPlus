@@ -54,6 +54,7 @@ const checkThumbAPI = '/checkThumb';
 const thumbUpAPI = '/thumbUp';
 const thumbDowmAPI = '/thumbDown';
 const staticPath = 'img/';
+const userInfoAPI = '/getUserInfo';
 
 let postVue = new Vue({
 	el: '#Post-Area',
@@ -77,7 +78,7 @@ let postVue = new Vue({
 				return;
 			}
 			let getParam = {id: this.postID};
-			this.$http.post(postAPI, getParam).then(function (response) {
+			this.$http.post(postAPI, getParam).then(async function (response) {
 				if (response.body.code === 0) {
 					myAlert("Error", response.body.errMessage);
 					return;
@@ -86,7 +87,23 @@ let postVue = new Vue({
 					this.editor = response.body.editor;
 					this.title = response.body.title;
 					this.content = response.body.content;
-					this.comments = response.body.comments;
+					let comments = response.body.comments;
+					for (let i in comments) {
+						let comment = {
+							poster: Object.keys(comments[i])[0],
+							content: Object.values(comments[i])[0]
+						};
+						await postVue.$http.post(userInfoAPI, {name: comment.poster, flag: true}).then(function (response) {
+							if (response.body.code === 0) {
+								myAlert("Error Retrieving User Info", response.body.errMessage);
+								return;
+							}
+							else if (response.body.code === 1) {
+								comment.userThumbnailURL = staticPath + response.body.imageUrl;
+							}
+                        });
+						this.comments.push(comment);
+					}
 					if (response.body.image.length !== 0) {
 						this.isImage = true;
 						this.fileUrl = staticPath + response.body.image;

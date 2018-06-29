@@ -77,8 +77,8 @@ block body
                         span.details-head Comments
                         .comments-block(v-for='comment of comments')
                           .comments-item
-                            img.img-circle(alt="img", src="img/follower.jpg", style='height:60px;width:60px;')
-                            span.details-words Follower 1 : &nbsp;&nbsp;&nbsp;&nbsp;Great Picture!
+                            img.img-circle(alt="img", v-bind:src='comment.userThumbnailURL', style='height:60px;width:60px;')
+                            span.details-words {{ comment.poster }} : &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content }}
                         .comment-send
                           .lead.emoji-picker-container(style='float:left;')
                             input#send-comment.details-input(data-emojiable="true", type="text")
