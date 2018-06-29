@@ -82,10 +82,10 @@ block body
                             span.details-words {{ comment.poster }} : &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content }}
                         .comment-send
                           .lead.emoji-picker-container(style='float:left;')
-                            input#send-comment.details-input(data-emojiable="true", type="text")
+                            input#send-comment.details-input(data-emojiable="true", type="text", v-model='commentEditor')
                           div.send-box
-                            input#send-commit.profile-btn(type='button', value='Send')
-                        
+                            input#send-commit.profile-btn(type='button', value='Send', v-on:click='sendComment')
+
 
       script(src='js/details.js')
       script(src='js/config.js')

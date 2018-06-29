@@ -55,6 +55,7 @@ const thumbUpAPI = '/thumbUp';
 const thumbDowmAPI = '/thumbDown';
 const staticPath = 'img/';
 const userInfoAPI = '/getUserInfo';
+const postCommentAPI = '/commentUp';
 
 let postVue = new Vue({
 	el: '#Post-Area',
@@ -68,7 +69,8 @@ let postVue = new Vue({
 		fileUrl: '',
 		postID: 0,
 		thumbs: 0,
-		format: ""
+		format: "",
+		commentEditor: ""
 	},
 	methods: {
 		initPost: function () {
@@ -138,6 +140,17 @@ let postVue = new Vue({
                             myAlert("Error", response.body.errMessage);
                         }
                     });
+				}
+            })
+        },
+		sendComment: function () {
+			this.$http.post(postCommentAPI, {postID: this.postID, content: this.commentEditor}).then(function (response) {
+				if (response.body.code === 0) {
+					myAlert("Comment Posting Error", response.body.errMessage);
+					return;
+				}
+				else if (response.body.code === 1) {
+					postVue.$http.post(userInfoAPI)
 				}
             })
         }
