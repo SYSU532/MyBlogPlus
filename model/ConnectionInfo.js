@@ -1,6 +1,6 @@
 exports.user = {
     host : 'localhost',
-    user : 'root',
-    password : '123456',
+    user : 'knowit',
+    password : 'sysu532',
     database : 'knowit'
 };
