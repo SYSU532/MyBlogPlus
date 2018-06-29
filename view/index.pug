@@ -55,7 +55,7 @@ block body
                                             i.fa.fa-chevron-up
                                         a.close-link(v-on:click="item.show = false")
                                             i.fa.fa-times
-                                .ibox-content.post-item.collapse.panel-collapse(v-on:click='showDetails(item.id)', v-bind:id="getItemDOMID(item.id)")
+                                .ibox-content.post-item.collapse.in.panel-collapse(v-on:click='showDetails(item.id)', v-bind:id="getItemDOMID(item.id)")
                                     div.panel-body
                                         h4(style='word-break: break-all;') {{ item.content }}
                                     i.fa.fa-comments.comments
