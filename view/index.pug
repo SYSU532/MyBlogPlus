@@ -45,18 +45,18 @@ block body
                 .wrapper.wrapper-content(id='postList')
                     .row.row-post(v-for='item of items')
                         .col-lg-4(v-show="item.show")
-                            .ibox.float-e-margins
-                                .ibox-title
-                                    h5 {{ item.title }}
-                                    span.label.label-primary MyBlog+
-                                    h5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editor: {{ item.editor }}
-                                    .ibox-tools
-                                        a.collapse-link
+                            .ibox.float-e-margins.panel
+                                .ibox-title.panel-heading
+                                    .ibox-tools.panel-title
+                                        h5(v-on:click='showDetails(item.id)', style='cursor: pointer;') {{ item.title }}
+                                        span.label.label-primary MyBlog+
+                                        h5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editor: {{ item.editor }}
+                                        a.collapse-link(data-toggle="collapse", v-bind:href="'#'+getItemDOMID(item.id)")
                                             i.fa.fa-chevron-up
                                         a.close-link(v-on:click="item.show = false")
                                             i.fa.fa-times
-                                .ibox-content.post-item(v-on:click='showDetails(item.id)')
-                                    div
+                                .ibox-content.post-item.collapse.panel-collapse(v-on:click='showDetails(item.id)', v-bind:id="getItemDOMID(item.id)")
+                                    div.panel-body
                                         h4(style='word-break: break-all;') {{ item.content }}
                                     i.fa.fa-comments.comments
                                         span {{ item.commentsCount }}

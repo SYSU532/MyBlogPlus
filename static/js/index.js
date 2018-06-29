@@ -31,6 +31,9 @@ let vuePostList = new Vue({
    methods: {
        showDetails: function (id) {
             window.location.href = `/details?id=${id}`;
+       },
+       getItemDOMID: function (id) {
+           return "item-" + id;
        }
    }
 });
