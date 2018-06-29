@@ -56,13 +56,13 @@ block body
                           .friends-title
                             span.friends-name Friends List
                           #friends-list
-                            .friends-row(v-for="item of items", v-on:click="checkFriendInfo(item.username)")
+                            .friends-row(v-for="item of items", v-on:click="AddToggle($event)")
                               img.friends-img.img-circle(alt='image', v-bind:src="item.imageUrl")
                               span.friends-name {{ item.username }}
                               a.dropdown-toggle(data-toggle="dropdown")
                               ul.dropdown-menu.animated.fadeInRight.friend-item(data-toggle="true")
                                 li
-                                  a.f-request Check {{ item.username }}'s Profiles
+                                  a.f-request(v-on:click="checkFriendInfo(item.username)") Check {{ item.username }}'s Profiles
                         .friends-right(style='background-color: #F3F3F4;')
                           div#hide-evil
                           .friends-title(style='width:100%;margin-left:0;')

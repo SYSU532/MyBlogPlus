@@ -16,7 +16,6 @@ $(document).ready(function(){
       window.emojiPicker.discover();
       initInfo();
       initFriends();
-      AddToggle();
 });
 
 let vueFriends = new Vue({
@@ -30,6 +29,9 @@ let vueFriends = new Vue({
                 var phone = response.body.phone, email = response.body.email;
                 myAlert(username + '\'s Info', 'Username: ' + username + '<br>Phone: ' + phone + '<br>Email: ' + email);
             });
+        },
+        AddToggle: function(event){
+            AddToggle0(event.target);
         }
     }
 });
@@ -48,6 +50,11 @@ function initFriends(){
             });
         });
     });
+}
+
+function AddToggle0(el){
+    var target = el.children[3];
+    $(target).toggle();
 }
 
 function onFriendItemClick(){

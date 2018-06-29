@@ -159,7 +159,7 @@ router.post('/upload', async (ctx, next)=>{
 
 router.post('/checkThumb', async(ctx, next)=>{
     var body = ctx.request.body;
-    var username = body.name, postID = body.id;
+    var username = ctx.session.user, postID = body.id;
     var dataRes = await control.checkThumbOrNot(username, postID);
     var jsonBack = {
         'haveThumb' : dataRes
@@ -169,21 +169,21 @@ router.post('/checkThumb', async(ctx, next)=>{
 
 router.post('/thumbUp', async(ctx, next)=>{
     var body = ctx.request.body;
-    var thumbUser = ctx.session.name, pass = ctx.session.pass, postID = body.postID;
+    var thumbUser = ctx.session.user, pass = ctx.session.pass, postID = body.postID;
     var dataRes = await control.GiveThumbUp(thumbUser, pass, postID);
     ctx.response.body = JSON.stringify(dataRes);
 });
 
 router.post('/thumbDown', async(ctx, next)=>{
     var body = ctx.request.body;
-    var thumbUser = ctx.session.name, pass = ctx.session.pass, postID = body.postID;
+    var thumbUser = ctx.session.user, pass = ctx.session.pass, postID = body.postID;
     var dataRes = await control.DeleteThumbUp(thumbUser, pass, postID);
     ctx.response.body = JSON.stringify(dataRes);
 });
 
 router.post('/commentUp', async(ctx, next)=>{
     var body = ctx.request.body;
-    var thumbUser = ctx.session.name, pass = ctx.session.pass,
+    var thumbUser = ctx.session.user, pass = ctx.session.pass,
          postID = body.postID, content = body.content;
     var dataRes = await control.LeaveComment(thumbUser, pass, postID, content);
     ctx.response.body = JSON.stringify(dataRes);
