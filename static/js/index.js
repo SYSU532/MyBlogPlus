@@ -89,8 +89,8 @@ function initInfo(){
     vueUserInfo.$http.post(getInfoAPI).then(function (response) {
         if(response.body.code === 1){
             var body = response.body;
-            $("#user-img").attr("src", 'img/' + body.imageUrl);
-            window['localStorage'].imageUrl = body.imageUrl;
+            $("#user-img").attr("src", 'img/' + body.imageUrl + "?" + Math.random());
+            window['localStorage'].imageUrl = body.imageUrl + "?" + Math.random();
             window['localStorage'].username = body.username;
             $("#user-img").css("opacity", "1");
             $("#user-name").html('<strong class="font-bold">' + body.username + '</strong>');

@@ -82,10 +82,10 @@ function onChangeInfo(){
         },
     }).then(function(response){
         initUserMess(0);
-        window['localStorage'].imageUrl = Store.username + imgType;
+        window['localStorage'].imageUrl = Store.username + imgType + '?' + Math.random();
         $("#user-img").css("opacity", '0');
         setTimeout(function(){
-            $("#user-img").attr("src", 'img/' + Store.username + imgType + '?temp=' + Math.random());
+            $("#user-img").attr("src", 'img/' + Store.username + imgType + '?' + Math.random());
             $("#user-img").css("opacity", '1');
         }, 500);
         myAlert('Success', '<br>User Info Change Success');
