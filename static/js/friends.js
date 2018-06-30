@@ -2,7 +2,7 @@
 
 Vue.use(VueResource);
 
-var ws = new WebSocket("ws://localhost:18088");
+var ws = new WebSocket(`wss://${window.location.host}/wss`);
 var myImageUrl = '', friendImageUrl = '';
 
 $(document).ready(function(){

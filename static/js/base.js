@@ -3,6 +3,13 @@
 Vue.use(VueResource);
 
 $(document).ready(function(){
+    //force https
+    var targetProtocol = "https:";
+    if (window.location.protocol != targetProtocol)
+        window.location.href = targetProtocol +
+            window.location.href.substring(window.location.protocol.length);
+
+
     vueBase.$http.post('/myFriendRequest', {name: $("#user-name").children("strong").html()}).then(function(response){
         vueNum.number = 0;
         var result = response.body.requestUser;

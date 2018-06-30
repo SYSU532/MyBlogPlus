@@ -3,6 +3,12 @@
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+//force https
+var targetProtocol = "https:";
+if (window.location.protocol != targetProtocol)
+    window.location.href = targetProtocol +
+        window.location.href.substring(window.location.protocol.length);
+
 
 function showError(message){
     Bind_alert();

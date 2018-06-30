@@ -1,5 +1,12 @@
 // Logup.js
 
+//Force https
+var targetProtocol = "https:";
+if (window.location.protocol != targetProtocol)
+    window.location.href = targetProtocol +
+        window.location.href.substring(window.location.protocol.length);
+
+
 Vue.use(VueResource);
 
 var username = /^[a-zA-Z][a-zA-z0-9\_]{5,17}/, phone = /^[1-9][0-9]{10}$/;

@@ -1,5 +1,5 @@
 const session = require('koa-session-minimal');
-const MysqlSession = require('koa-mysql-session');
+const MysqlSession = require('./sessionDB');
 const DBUser = require('./ConnectionInfo');
 // class dbStore extends Store {
 //     constructor() {
