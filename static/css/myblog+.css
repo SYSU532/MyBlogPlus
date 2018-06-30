@@ -521,15 +521,16 @@
 .sendMessage{
 	width: 100%;
 	height: 60px;
-	padding-left: 90%;
+	padding-left: 78%;
 	padding-top: 10px;
 }
 
 .getMessage{
-	width: 100%;
+	width: 30%;
 	height: 60px;
 	padding-top: 10px;
 	padding-left: 10px;
+	margin-bottom: 10px;
 }
 
 .talk-head{
@@ -538,20 +539,40 @@
 }
 
 .whiteBox{
-	display: inline-block;
-	width: 100px;
-	height: 50px;
+	display: block;
+	width: auto;
+	float: left;
+	max-width: 120px;
+	min-width: 80px;
+	min-height: 50px;
+	height: auto;
 	line-height: 50px;
-	margin-left: 10px;
+	margin-left: 5px;
+	margin-bottom: 5px;
 	padding-left: 5px;
+	word-break: break-all;
 	background-color: white;
 }
 
 .greenBox{
-	display: inline-block;
-	width: 100px;
-	height: 50px;
-	margin-left: 10px;
+	display: block;
+	float: right;
+	width: auto;
+	max-width: 120px;
+	min-width: 80px;
+	min-height: 50px;
+	height: auto;
+	line-height: 50px;
 	padding-left: 5px;
+	padding-right: 5px;
+	word-break: break-all;
 	background-color: #18a689;
+}
+
+.solid-div{
+	width: 120px;
+	height: auto;
+	margin-bottom: 5px;
+	padding-right: 5px;
+	float: left;
 }

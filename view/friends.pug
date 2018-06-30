@@ -74,10 +74,11 @@ block body
                               span#talking-friend.friends-words
                             div.chat-panel(id='chat-list')
                               .chat-row(v-for="item of items", v-bind:class="{sendMessage: item.send, getMessage: !item.send}")
-                                img.talk-head.img-circle(v-bind:src="item.imageUrl", v-if="!item.send")
-                                div(v-bind:class="{greenBox: item.send, whiteBox: !item.send}")
-                                  span {{ item.content }}
-                                img.talk-head.img-circle(v-bind:src="item.imageUrl", v-if="item.send")
+                                img.talk-head.img-circle(v-bind:src="item.imageUrl", v-if="!item.send" style="float:left;margin-top:-5px;margin-bottom:10px;")
+                                div.solid-div
+                                  div(v-bind:class="{greenBox: item.send, whiteBox: !item.send}")
+                                    span {{ item.content }}
+                                img.talk-head.img-circle(v-bind:src="item.imageUrl", v-if="item.send" style="float:left;margin-top:-5px;margin-bottom:10px;")
 
                             div.send-panel
                               .lead.emoji-picker-container

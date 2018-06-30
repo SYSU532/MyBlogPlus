@@ -45,6 +45,7 @@ let vueFriends = new Vue({
         chatWithFriend: function(username){
             $("#talking-friend").html(username);
             $(this.clickItem).toggle();
+            vueChatList.items = [];
             this.$http.post('/getUserInfo', {flag: true, name: username}).then(function(response){
                 friendImageUrl = 'img/' + response.body.imageUrl;
                 // Get Old Talking history
@@ -60,10 +61,10 @@ let vueFriends = new Vue({
                             'send': mySend
                         }
                         vueChatList.items.push(newItem);
-                        $(".chat-panel").scrollTop = $(".chat-panel").scrollHeight;
                 });
             });
             });
+            $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
         }
     }
 });
@@ -160,6 +161,8 @@ function appendMessage(flag, content){
     }else {
         newItem.imageUrl = friendImageUrl;
     }
-    $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
     vueChatList.items.push(newItem);
+    setTimeout(function(){
+        $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+    }, 100);
 }

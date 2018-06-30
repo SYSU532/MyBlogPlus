@@ -60,7 +60,7 @@ block body
                         div#hide-evil
                         .search-title
                           span.search-words All Mails
-                        .all-mails(id='all-mails')
+                        .all-mails(id='all-mails', style="overflow:auto;")
                           .friends-row(v-for='item of items', style="width: 82%;margin-left:10%;", v-on:click="dealRequest(item.username)")
                             img.friends-img.img-circle(alt='image', v-bind:src='item.imageUrl')
                             span.friends-name {{ item.username }}'s Adding-Friend Request
