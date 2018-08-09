@@ -83,11 +83,7 @@ function onChangeInfo(){
         },
     }).then(function(response){
         initUserMess(0);
-<<<<<<< HEAD
-        window['localStorage'].imageUrl = Store.username + imgType+ '?' + Math.random();
-=======
         window['localStorage'].imageUrl = Store.username + imgType + '?' + Math.random();
->>>>>>> 327f990411bac083106e562854903699ae952254
         $("#user-img").css("opacity", '0');
         setTimeout(function(){
             $("#user-img").attr("src", 'img/' + Store.username + imgType + '?' + Math.random());
