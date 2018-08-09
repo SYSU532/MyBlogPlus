@@ -2,7 +2,7 @@
 
 Vue.use(VueResource);
 
-var ws = new WebSocket("ws://localhost:18088");
+var ws = new WebSocket(`ws://localhost:18088`);
 var myImageUrl = '', friendImageUrl = '';
 
 $(document).ready(function(){
@@ -122,6 +122,30 @@ function initChatRoom(){
     $("#send").click(onSendMess);
 }
 
+function autoGet(username){
+    $("#talking-friend").html(username);
+    vueChatList.items = [];
+    vueChatList.$http.post('/getUserInfo', {flag: true, name: username}).then(function(response){
+        friendImageUrl = 'img/' + response.body.imageUrl;
+        // Get Old Talking history
+        var myName = $("#user-name").children("strong").html();
+        var friendName = $("#talking-friend").html();
+        vueChatList.$http.post('/allTalks', {userSend: myName, userGet: friendName}).then(function(response){
+            var messages = response.body.talks;
+            messages.forEach(function(item){
+                var mySend = item.send == 1 ? true : false;
+                var newItem = {
+                    'content': item.content,
+                    'imageUrl': mySend ? myImageUrl : friendImageUrl,
+                    'send': mySend
+                }
+                vueChatList.items.push(newItem);
+        });
+    });
+    });
+    $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+}
+
 function parseMessage(mess){
     var res = mess.split('\'$\'');
     var userSend = res[0], userGet = res[1], content = res[2];
@@ -129,8 +153,13 @@ function parseMessage(mess){
     if(myName === userSend){
         appendMessage(true, content);
     }else if(myName === userGet){
-        appendMessage(false, content);
+        if($("#talking-friend").html() === '' && userSend !== undefined){
+            autoGet(userSend);
+        }else {
+            appendMessage(false, content);
+        }
     }
+
 }
 
 function onSendMess(){

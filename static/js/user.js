@@ -60,6 +60,7 @@ function initUserMess(flag){
         if(body.code === 1){
             if(flag == undefined){
                 $("#head-img").attr("src", 'img/' + body.imageUrl);
+                $("#head-img").css("opacity", "1");
             }
             $("#username").val(body.username);
             $("#phone").val(body.phone);
@@ -82,7 +83,7 @@ function onChangeInfo(){
         },
     }).then(function(response){
         initUserMess(0);
-        window['localStorage'].imageUrl = Store.username + imgType;
+        window['localStorage'].imageUrl = Store.username + imgType+ '?' + Math.random();
         $("#user-img").css("opacity", '0');
         setTimeout(function(){
             $("#user-img").attr("src", 'img/' + Store.username + imgType + '?temp=' + Math.random());

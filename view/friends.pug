@@ -54,12 +54,12 @@ block body
                         .friends-left
                           .friends-title
                             span.friends-name Friends List
-                          #friends-list
+                          #friends-list(style="overflow:auto;min-height:600px;width: 230px;")
                             .friends-row(v-for="item of items", v-on:click="AddToggle($event)")
                               img.friends-img.img-circle(alt='image', v-bind:src="item.imageUrl")
                               span.friends-name {{ item.username }}
                               a.dropdown-toggle(data-toggle="dropdown")
-                              ul.dropdown-menu.animated.fadeInRight.friend-item(data-toggle="true")
+                              ul.dropdown-menu.animated.fadeInDown.friend-item(data-toggle="true")
                                 li
                                   a.f-request(v-on:click="checkFriendInfo(item.username)") Check {{ item.username }}'s Profiles
                                 li.divider
@@ -72,12 +72,15 @@ block body
                           div
                             div.talk-friend
                               span#talking-friend.friends-words
-                            div.chat-panel(id='chat-list')
+                            div.chat-panel.pre-scrollable(id='chat-list')
                               .chat-row(v-for="item of items", v-bind:class="{sendMessage: item.send, getMessage: !item.send}")
+                                div(style="clear:both")
                                 img.talk-head.img-circle(v-bind:src="item.imageUrl", v-if="!item.send" style="float:left;margin-top:-5px;margin-bottom:10px;")
+                                div.white-angle(v-if="!item.send")
                                 div.solid-div
                                   div(v-bind:class="{greenBox: item.send, whiteBox: !item.send}")
                                     span {{ item.content }}
+                                div.green-angle(v-if="item.send")
                                 img.talk-head.img-circle(v-bind:src="item.imageUrl", v-if="item.send" style="float:left;margin-top:-5px;margin-bottom:10px;")
 
                             div.send-panel
