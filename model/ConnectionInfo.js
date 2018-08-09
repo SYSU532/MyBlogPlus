@@ -1,7 +1,7 @@
 exports.user = {
     host : 'localhost',
-    user : 'knowit',
+    user : 'myblog',
     password : 'sysu532',
-    database : 'knowit',
+    database : 'myblog',
     charset: 'utf8mb4_unicode_ci'
 };
