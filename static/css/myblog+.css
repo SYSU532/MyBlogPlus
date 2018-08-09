@@ -224,6 +224,7 @@
 * Friends Page Part 
 */
 .friends-row{
+	position: relative;
 	border: 1px solid #ECECEC;
 	border-radius: 10px;
 	margin-left: 2%;
@@ -325,8 +326,9 @@
 }
 
 .friend-item{
-	top: 22%;
-	left: 15%;
+	left: 20px;
+	position: absolute;
+	top: 50px;
 }
 
 /*
@@ -521,16 +523,16 @@
 .sendMessage{
 	width: 100%;
 	height: 60px;
-	padding-left: 78%;
+	padding-left: 70%;
 	padding-top: 10px;
 }
 
 .getMessage{
-	width: 30%;
+	width: 100%;
 	height: 60px;
 	padding-top: 10px;
 	padding-left: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .talk-head{
@@ -542,14 +544,14 @@
 	display: block;
 	width: auto;
 	float: left;
-	max-width: 120px;
+	max-width: 180px;
 	min-width: 80px;
 	min-height: 50px;
 	height: auto;
-	line-height: 50px;
+	line-height: 20px;
 	margin-left: 5px;
 	margin-bottom: 5px;
-	padding-left: 5px;
+	padding: 5px;
 	word-break: break-all;
 	background-color: white;
 }
@@ -558,21 +560,56 @@
 	display: block;
 	float: right;
 	width: auto;
-	max-width: 120px;
+	max-width: 180px;
 	min-width: 80px;
 	min-height: 50px;
 	height: auto;
-	line-height: 50px;
-	padding-left: 5px;
-	padding-right: 5px;
+	line-height: 20px;
+	padding: 5px;
 	word-break: break-all;
+	color: #ECECEC;
 	background-color: #18a689;
 }
 
 .solid-div{
-	width: 120px;
+	width: 150px;
 	height: auto;
 	margin-bottom: 5px;
 	padding-right: 5px;
 	float: left;
+}
+
+.chat-row{
+	transition: all 1s;
+	width: 100%;
+	animation: fadeIn 1s;
+}
+
+.white-angle{
+	float: left;
+	width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid white;
+    border-bottom: 10px solid transparent;
+	border-left: 10px solid transparent;
+	margin-right: -5px;
+	margin-top: 12px;
+}
+
+.green-angle{
+	float: left;
+	width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+	border-left: 10px solid #18a689;
+	margin-left: -8px;
+	margin-top: 12px;
+}
+
+@keyframes fadeIn{
+	from{opacity: 0;}
+	to{opacity: 1;}
 }

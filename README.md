@@ -1,4 +1,10 @@
-# MyBlogPlus
-### This project is for the final assignment of the Database System course, named MyBlog+.
+# 数据库系统课程期末项目 --- MyBlog+
+### 班级：软工一班
+### 队长名称：陈明亮
+### 队员： 陈铭涛、陈慕远、蔡湘国
 
-### Hope you enjoy it~~
+### 系统使用方式：
+* 访问URL：https://esblog.chenmt.science
+* 本地测试：在根目录下打开代码文件夹，在命令行内输入 node app.js ，即可在本地的18080端口进行测试
+
+### Enjoy~~~
